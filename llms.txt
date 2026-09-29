@@ -1,0 +1,22 @@
+# Solar Green Suporte
+
+> Empresa de manutenção, monitoramento e regularização de sistemas de energia solar fotovoltaica já instalados, em Belém e no Norte do Pará. Não vende nem instala usina nova: cuida da usina que o cliente já tem.
+
+## O que a empresa faz
+- Monitoramento remoto da geração, com aviso em até 48 horas úteis se o sistema falhar
+- Limpeza técnica dos módulos e manutenção preventiva (conexões, cabeamento, inversor), com relatório fotográfico assinado
+- Regularização junto à concessionária Equatorial (ligação nova, aumento de carga, troca de titularidade, acesso para microgeração distribuída)
+- Expansão de usina existente, quando o sistema atual não é suficiente para zerar a fatura
+
+## Área de atuação
+Região Norte do Pará, com sede em Belém. Atendimento presencial com hora marcada.
+
+## Contato
+- WhatsApp: +55 91 98759-8592
+- E-mail: solargreensuporte@gmail.com
+- Endereço: R. Municipalidade, 945, Umarizal, Belém/PA, CEP 66.050-350
+- Horário: segunda a sexta, 8h às 18h
+
+## Páginas
+- [Início: calculadora de perda de geração e serviços](https://solargreensuporte.com.br/)
+- [Política de privacidade](https://solargreensuporte.com.br/privacidade.html)

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://solargreensuporte.com.br/sitemap.xml
