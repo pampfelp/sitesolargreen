@@ -161,9 +161,7 @@ nav a:hover{color:var(--escuro-ink);}
 .opcional[open] summary svg{transform:rotate(90deg);}
 .opcional .campo{margin-top:10px;}
 
-/* resultado */
-.resultado{margin-top:22px;border-top:1px solid var(--escuro-linha);padding-top:22px;display:none;}
-.resultado.on{display:block;}
+/* resultado (conteúdo vive dentro do #modalResultado — ver seção de modal) */
 .res-desemp{
   display:inline-flex;align-items:baseline;gap:8px;background:var(--escuro-surface);
   border:1px solid var(--escuro-linha);border-radius:10px;padding:9px 14px;
@@ -193,7 +191,7 @@ nav a:hover{color:var(--escuro-ink);}
 /* seletor composto de propósito: ".hero p" (genérica, mais acima no arquivo)
    tem mais especificidade que ".res-fonte" sozinha e vencia a cascata,
    deixando o texto grande mesmo com font-size:10px declarado aqui. */
-.resultado .res-fonte{font-size:10px;color:var(--escuro-soft);margin-top:14px;line-height:1.4;}
+#mrResumo .res-fonte{font-size:10px;color:var(--escuro-soft);margin-top:14px;line-height:1.4;}
 
 /* ── Gráfico ────────────────────────────────────────── */
 .gr-leg{display:flex;flex-wrap:wrap;gap:16px;font-size:.76rem;color:var(--claro-soft);margin-bottom:18px;}
@@ -284,6 +282,56 @@ nav a:hover{color:var(--escuro-ink);}
 }
 .lb-fechar:hover{background:rgba(255,255,255,.22);}
 .lb-fechar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ── Modal do resultado da calculadora ───────────────── */
+.modal-resultado{
+  position:fixed;inset:0;z-index:150;background:rgba(3,15,10,.93);
+  display:flex;align-items:center;justify-content:center;padding:22px;
+  opacity:0;visibility:hidden;transition:opacity .22s ease;overflow-y:auto;
+}
+.modal-resultado.on{opacity:1;visibility:visible;}
+.mr-caixa{
+  position:relative;max-width:520px;width:100%;background:var(--escuro-surface);
+  border:1px solid var(--escuro-linha);border-radius:16px;padding:clamp(24px,4vw,34px);
+  margin:auto;transform:scale(.94);transition:transform .26s cubic-bezier(.2,.8,.25,1);
+}
+.modal-resultado.on .mr-caixa{transform:scale(1);}
+.mr-fechar{
+  position:absolute;top:16px;right:18px;background:none;border:none;cursor:pointer;
+  font-size:.76rem;font-weight:700;color:var(--escuro-faint);text-decoration:underline;
+  text-underline-offset:3px;padding:4px;
+}
+.mr-fechar:hover{color:var(--escuro-soft);}
+.mr-passo{display:none;}
+.mr-passo.on{display:block;}
+.mr-cta{flex-direction:column;}
+.mr-cta .btn-zap,.mr-cta .btn-form{width:100%;justify-content:center;box-sizing:border-box;cursor:pointer;font-family:inherit;}
+.mr-voltar{
+  background:none;border:none;cursor:pointer;color:var(--escuro-soft);font-weight:700;
+  font-size:.82rem;padding:0;margin-bottom:16px;
+}
+.mr-voltar:hover{color:var(--verde);}
+#mrDuvidas h3{font-family:var(--display);font-weight:800;color:var(--escuro-ink);}
+#mrSucesso{text-align:center;padding:8px 0;}
+#mrSucesso p{font-size:.94rem;color:var(--escuro-soft);margin-bottom:18px;}
+#mrSucesso .btn-zap{width:100%;justify-content:center;box-sizing:border-box;margin-bottom:14px;}
+@media (max-width:480px){
+  .modal-resultado{padding:0;align-items:flex-end;}
+  .mr-caixa{border-radius:16px 16px 0 0;max-height:92vh;overflow-y:auto;}
+}
+
+/* Chip que reabre o modal depois que a pessoa fecha e continua rolando a página */
+.calc-reabrir{
+  display:none;align-items:center;justify-content:space-between;gap:12px;
+  margin-top:18px;border-top:1px solid var(--escuro-linha);padding-top:18px;
+  font-size:.85rem;color:var(--escuro-soft);
+}
+.calc-reabrir.on{display:flex;}
+.calc-reabrir strong{color:var(--perda);}
+.calc-reabrir button{
+  background:var(--verde);color:var(--breu);border:none;border-radius:8px;
+  font-weight:800;font-size:.82rem;padding:9px 16px;cursor:pointer;white-space:nowrap;
+}
 
 /* ── Cartões de serviço ─────────────────────────────── */
 .grid{display:grid;gap:16px;}
@@ -380,7 +428,7 @@ footer a:hover{color:var(--verde);}
 /* Fora do horário, o contato por formulário passa a ser o botão principal */
 .res-cta.fechado .btn-form{order:-1;background:var(--verde);color:var(--breu);border-color:var(--verde);font-weight:800;}
 .res-cta.fechado .btn-zap{background:transparent;color:var(--escuro-ink);border:1px solid #3d8265;}
-.resultado .res-horario{font-size:.8rem;color:var(--escuro-soft);margin-top:12px;line-height:1.45;}
+#mrResumo .res-horario{font-size:.8rem;color:var(--escuro-soft);margin-top:12px;line-height:1.45;}
 
 /* Gráfico de exemplo, antes de a pessoa calcular a própria usina */
 .gr-exemplo-nota{display:none;font-size:.8rem;color:var(--claro-soft);margin-bottom:12px;}

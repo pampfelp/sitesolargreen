@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="css/style.css?v=2026-09-29a">
+<link rel="stylesheet" href="css/style.css?v=2026-09-29b">
 <link rel="preload" as="image" href="assets/hero-usina-mobile.webp" media="(max-width:700px)">
 <link rel="preload" as="image" href="assets/hero-usina.webp" media="(min-width:701px)">
 
@@ -59,7 +59,7 @@
   "sameAs": ["https://instagram.com/solargreensuporte"]
 }
 </script>
-<script type="module" src="js/app.js?v=2026-09-29a"></script>
+<script type="module" src="js/app.js?v=2026-09-29b"></script>
 </head>
 <body>
 <a class="pular" href="#principal">Pular para o conteúdo</a>
@@ -137,25 +137,11 @@
           <button class="calc-btn" id="btnCalc" type="submit">Calcular minha perda</button>
         </form>
 
-        <div class="resultado" id="res" aria-live="polite">
-          <div class="res-desemp"><span class="v" id="resDesemp">0%</span><span class="l">do desempenho esperado</span></div>
-          <div class="res-lbl">Nessa configuração, sua usina deixa de gerar</div>
-          <div class="res-n" id="resAno">R$ 0</div>
-          <div class="res-sub">por ano</div>
-          <div class="res-linhas">
-            <div class="res-item"><div class="v" id="resMes">R$ 0</div><div class="l">por mês</div></div>
-            <div class="res-item"><div class="v" id="resKwh">0 kWh</div><div class="l">perdidos no ano</div></div>
-            <div class="res-item"><div class="v" id="resPior">-</div><div class="l">pior mês</div></div>
-          </div>
-          <div class="res-cta" id="resCta">
-            <a class="btn-zap" id="ctaZap" href="https://wa.me/5591987598592" data-evento="whatsapp_resultado" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
-              Falar no WhatsApp
-            </a>
-            <a class="btn-form" id="ctaContato" href="#contato" data-evento="contato_resultado">Deixar meu contato</a>
-          </div>
-          <p class="res-horario" id="resHorario"></p>
-          <p class="res-fonte">Estimativa. Irradiação do Global Solar Atlas (Banco Mundial, Solargis), plano inclinado no ângulo ideal, com 20% de perdas normais do sistema. O número real depende de sombreamento, idade dos módulos e estado do inversor, medidos na vistoria.</p>
+        <!-- Fica visível depois que a pessoa fecha o modal de resultado, pra não
+             perder o número calculado se rolar a página e voltar aqui. -->
+        <div class="calc-reabrir" id="calcReabrir">
+          <span>Sua perda estimada: <strong id="reabrirValor">R$ 0</strong>/ano</span>
+          <button type="button" id="btnReabrir">Ver detalhes</button>
         </div>
       </div>
     </div>
@@ -463,6 +449,66 @@
     Falar no WhatsApp
   </a>
   <span class="b-hor" id="barraHorario">Segunda a sexta, 8h às 18h</span>
+</div>
+
+<!-- ══ MODAL DO RESULTADO DA CALCULADORA ══ -->
+<div class="modal-resultado" id="modalResultado" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Resultado do cálculo">
+  <div class="mr-caixa">
+    <button class="mr-fechar" id="mrFechar" type="button">Continuar no site</button>
+
+    <div class="mr-passo on" id="mrResumo">
+      <div class="res-desemp"><span class="v" id="resDesemp">0%</span><span class="l">do desempenho esperado</span></div>
+      <div class="res-lbl">Nessa configuração, sua usina deixa de gerar</div>
+      <div class="res-n" id="resAno">R$ 0</div>
+      <div class="res-sub">por ano</div>
+      <div class="res-linhas">
+        <div class="res-item"><div class="v" id="resMes">R$ 0</div><div class="l">por mês</div></div>
+        <div class="res-item"><div class="v" id="resKwh">0 kWh</div><div class="l">perdidos no ano</div></div>
+        <div class="res-item"><div class="v" id="resPior">-</div><div class="l">pior mês</div></div>
+      </div>
+      <div class="res-cta mr-cta" id="resCta">
+        <a class="btn-zap" id="ctaZap" href="https://wa.me/5591987598592" data-evento="whatsapp_resultado" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          Resolver a perda agora
+        </a>
+        <button class="btn-form" id="ctaDuvidas" type="button">Tirar dúvidas</button>
+      </div>
+      <p class="res-horario" id="resHorario"></p>
+      <p class="res-fonte">Estimativa. Irradiação do Global Solar Atlas (Banco Mundial, Solargis), plano inclinado no ângulo ideal, com 20% de perdas normais do sistema. O número real depende de sombreamento, idade dos módulos e estado do inversor, medidos na vistoria.</p>
+    </div>
+
+    <div class="mr-passo" id="mrDuvidas">
+      <button class="mr-voltar" id="mrVoltar" type="button">&larr; Voltar ao resultado</button>
+      <h3>Deixe seu contato</h3>
+      <p class="lede" style="margin-top:6px;">A gente te chama no WhatsApp para explicar o resultado e combinar a vistoria.</p>
+      <form id="mrForm" novalidate>
+        <div class="campos">
+          <div class="campo full"><label for="mNome">Nome</label><input type="text" id="mNome" autocomplete="name" required></div>
+          <div class="campo full"><label for="mZap">WhatsApp</label><input type="tel" id="mZap" autocomplete="tel" inputmode="tel" required></div>
+          <div class="campo"><label for="mCidade">Cidade</label><input type="text" id="mCidade" autocomplete="address-level2"></div>
+          <div class="campo"><label for="mServico">O que você precisa</label>
+            <select id="mServico">
+              <option>Limpeza e manutenção</option>
+              <option>Monitoramento</option>
+              <option>Regularização na Equatorial</option>
+              <option>Expansão da usina</option>
+              <option>Ainda não sei</option>
+            </select>
+          </div>
+        </div>
+        <div class="hp" aria-hidden="true"><label for="mSite">Não preencha este campo</label><input type="text" id="mSite" name="site_url" tabindex="-1" autocomplete="off"></div>
+        <label class="consent"><input type="checkbox" id="mOk" required><span>Autorizo a Solar Green a usar meus dados para entrar em contato. <a href="privacidade.html">Política de privacidade</a></span></label>
+        <p class="erro" id="mrErro" role="alert"></p>
+        <button class="calc-btn" id="mrBtn" type="submit">Quero ser chamado</button>
+      </form>
+    </div>
+
+    <div class="mr-passo form-ok" id="mrSucesso">
+      <p>Recebemos seu contato. A gente chama você no WhatsApp em horário comercial.</p>
+      <a class="btn-zap" id="mrZapSucesso" href="https://wa.me/5591987598592" target="_blank" rel="noopener">Falar agora no WhatsApp</a>
+      <button class="mr-voltar" id="mrFecharSucesso" type="button">Continuar no site</button>
+    </div>
+  </div>
 </div>
 
 <!-- ══ LIGHTBOX DE FOTOS ══ -->

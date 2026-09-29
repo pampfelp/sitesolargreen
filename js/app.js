@@ -1,11 +1,11 @@
 // Solar Green Suporte, site institucional. Tudo que mexe na tela fica aqui;
 // a conta e as regras ficam em calculo.js, os dados fixos em config.js.
-import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-09-29a';
+import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-09-29b';
 import {
   MESES, encontrarCidade, filtrarCidades, calcularPerda, estaAberto, linkWhats,
   moeda, kwhTexto, mensagemDiagnostico, mensagemServico, telefoneValido,
-} from './calculo.js?v=2026-09-29a';
-import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-09-29a';
+} from './calculo.js?v=2026-09-29b';
+import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-09-29b';
 
 const $ = id => document.getElementById(id);
 const semAnimacao = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -208,7 +208,7 @@ $('calcForm').addEventListener('submit', e => {
   $('resMes').textContent = moeda(r.perdaReais / 12);
   $('resKwh').textContent = kwhTexto(r.perdaKwh);
   $('resPior').textContent = MESES[r.piorMes.indice] + ', ' + moeda(r.piorMes.reais);
-  $('res').classList.add('on');
+  $('reabrirValor').textContent = moeda(r.perdaReais);
 
   const msg = mensagemDiagnostico({
     placas: c.placas, potenciaW: c.potenciaW, kwp: r.kwp, cidade: cidade || c.cidadeTexto,
@@ -225,7 +225,47 @@ $('calcForm').addEventListener('submit', e => {
   ultimo = { esp: r.esperado, real: r.real, tarifa: c.tarifa };
   $('grafico').classList.remove('exemplo');
   desenhar();
-  $('res').scrollIntoView({ behavior: semAnimacao ? 'auto' : 'smooth', block: 'nearest' });
+  abrirModalResultado();
+});
+
+// ── Modal do resultado ───────────────────────────────────────────────────
+const modalResultado = $('modalResultado');
+let focoAntesModal = null;
+
+function mostrarPasso(idPasso) {
+  modalResultado.querySelectorAll('.mr-passo').forEach(p => p.classList.toggle('on', p.id === idPasso));
+  modalResultado.querySelector('.mr-caixa').scrollTop = 0;
+}
+
+function abrirModalResultado() {
+  focoAntesModal = document.activeElement;
+  mostrarPasso('mrResumo');
+  $('calcReabrir').classList.remove('on');
+  modalResultado.classList.add('on');
+  modalResultado.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  $('mrFechar').focus();
+}
+
+function fecharModalResultado() {
+  modalResultado.classList.remove('on');
+  modalResultado.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  $('calcReabrir').classList.add('on');
+  if (focoAntesModal && focoAntesModal.focus) focoAntesModal.focus();
+}
+
+$('mrFechar').addEventListener('click', fecharModalResultado);
+$('mrFecharSucesso').addEventListener('click', fecharModalResultado);
+$('mrVoltar').addEventListener('click', () => mostrarPasso('mrResumo'));
+$('ctaZap').addEventListener('click', fecharModalResultado);
+$('btnReabrir').addEventListener('click', abrirModalResultado);
+$('ctaDuvidas').addEventListener('click', () => {
+  if (ultimoCalculo && !$('mCidade').value) $('mCidade').value = ultimoCalculo.cidade;
+  mostrarPasso('mrDuvidas');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && modalResultado.classList.contains('on')) fecharModalResultado();
 });
 
 // ── Gráfico esperado x realizado ─────────────────────────────────────────
@@ -463,6 +503,41 @@ function registrarEnvio() {
   try { sessionStorage.setItem('sg_envios', JSON.stringify(enviosRecentes().concat([Date.now()]))); } catch (e) { /* segue */ }
 }
 
+// Lógica compartilhada pelo formulário de baixo e pelo formulário do modal:
+// valida, barra robô e limite de envios, grava o lead. Quem chama decide como
+// mostrar o erro (cada formulário tem seu próprio elemento) e o que fazer com 'ok'/'robo'.
+async function tentarEnviarLead(dados, ui) {
+  const { nome, zap, cidade, servico, site, consentimento, inicio } = dados;
+  const { botao, textoOcioso, mostrarErro } = ui;
+  if (nome.length < 2) { mostrarErro('Falta informar o seu nome.'); return null; }
+  if (!telefoneValido(zap)) { mostrarErro('Confira o WhatsApp: precisa do DDD e do número, por exemplo (91) 98759-8592.'); return null; }
+  if (!consentimento) { mostrarErro('Para enviar, marque a autorização de uso dos dados.'); return null; }
+
+  // Campo escondido que só robô preenche: finge que deu certo e não grava nada.
+  if (site) return 'robo';
+  if (enviosRecentes().length >= LEADS.maxEnviosPorSessao) {
+    mostrarErro('Já recebemos o seu contato. Para falar agora, use o WhatsApp.', true);
+    return null;
+  }
+
+  mostrarErro('');
+  botao.disabled = true;
+  botao.textContent = 'Enviando';
+  const tempo = inicio ? Date.now() - inicio : 0;
+  try {
+    await enviarLead(montarLead({ nome, zap, cidade, servico }, ultimoCalculo, {
+      pagina: location.pathname, ...utm, tempoPreenchimentoMs: tempo, suspeito: tempo < LEADS.tempoMinimoMs,
+    }));
+    registrarEnvio();
+    return 'ok';
+  } catch (err) {
+    botao.disabled = false;
+    botao.textContent = textoOcioso;
+    mostrarErro('Não conseguimos enviar agora. O melhor caminho é o WhatsApp.', true);
+    return null;
+  }
+}
+
 formulario.addEventListener('submit', async e => {
   e.preventDefault();
   const erro = $('formErro');
@@ -470,7 +545,8 @@ formulario.addEventListener('submit', async e => {
   const zap = $('fZap').value.trim();
   const cidade = $('fCidade').value.trim();
   const servico = $('fServico').value;
-  const mostrar = (texto, comLink) => {
+  const mostrarErro = (texto, comLink) => {
+    if (!texto) { erro.style.display = 'none'; return; }
     erro.textContent = texto;
     if (comLink) {
       erro.appendChild(document.createTextNode(' '));
@@ -483,30 +559,45 @@ formulario.addEventListener('submit', async e => {
     }
     erro.style.display = 'block';
   };
-  if (nome.length < 2) return mostrar('Falta informar o seu nome.');
-  if (!telefoneValido(zap)) return mostrar('Confira o WhatsApp: precisa do DDD e do número, por exemplo (91) 98759-8592.');
-  if (!$('fOk').checked) return mostrar('Para enviar, marque a autorização de uso dos dados.');
+  const resultado = await tentarEnviarLead(
+    { nome, zap, cidade, servico, site: $('fSite').value, consentimento: $('fOk').checked, inicio: inicioFormulario },
+    { botao: $('btnForm'), textoOcioso: 'Quero ser chamado', mostrarErro },
+  );
+  if (resultado === 'ok' || resultado === 'robo') window.location.href = 'obrigado.html';
+});
 
-  // Campo escondido que só robô preenche: finge que deu certo e não grava nada.
-  if ($('fSite').value) { window.location.href = 'obrigado.html'; return; }
-  if (enviosRecentes().length >= LEADS.maxEnviosPorSessao) {
-    return mostrar('Já recebemos o seu contato. Para falar agora, use o WhatsApp.', true);
-  }
+// ── Formulário "Tirar dúvidas" dentro do modal do resultado ─────────────
+const mrForm = $('mrForm');
+let inicioModal = 0;
+mrForm.addEventListener('input', () => { if (!inicioModal) inicioModal = Date.now(); });
 
-  erro.style.display = 'none';
-  const botao = $('btnForm');
-  botao.disabled = true;
-  botao.textContent = 'Enviando';
-  const tempo = inicioFormulario ? Date.now() - inicioFormulario : 0;
-  try {
-    await enviarLead(montarLead({ nome, zap, cidade, servico }, ultimoCalculo, {
-      pagina: location.pathname, ...utm, tempoPreenchimentoMs: tempo, suspeito: tempo < LEADS.tempoMinimoMs,
-    }));
-    registrarEnvio();
-    window.location.href = 'obrigado.html';
-  } catch (err) {
-    botao.disabled = false;
-    botao.textContent = 'Quero ser chamado';
-    mostrar('Não conseguimos enviar agora. O melhor caminho é o WhatsApp.', true);
+mrForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  const mrErro = $('mrErro');
+  const nome = $('mNome').value.trim();
+  const zap = $('mZap').value.trim();
+  const cidade = $('mCidade').value.trim();
+  const servico = $('mServico').value;
+  const mostrarErro = (texto, comLink) => {
+    if (!texto) { mrErro.classList.remove('on'); mrErro.textContent = ''; return; }
+    mrErro.textContent = texto;
+    if (comLink) {
+      mrErro.appendChild(document.createTextNode(' '));
+      const a = document.createElement('a');
+      a.href = linkWhats('Olá! Meu nome é ' + nome + (cidade ? ', sou de ' + cidade : '') + '. Preciso de: ' + servico + '.');
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'Falar no WhatsApp';
+      mrErro.appendChild(a);
+    }
+    mrErro.classList.add('on');
+  };
+  const resultado = await tentarEnviarLead(
+    { nome, zap, cidade, servico, site: $('mSite').value, consentimento: $('mOk').checked, inicio: inicioModal },
+    { botao: $('mrBtn'), textoOcioso: 'Quero ser chamado', mostrarErro },
+  );
+  if (resultado === 'ok' || resultado === 'robo') {
+    $('mrZapSucesso').href = $('ctaZap').href;
+    mostrarPasso('mrSucesso');
   }
 });
