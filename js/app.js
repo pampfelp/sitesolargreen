@@ -1,11 +1,11 @@
 // Solar Green Suporte, site institucional. Tudo que mexe na tela fica aqui;
 // a conta e as regras ficam em calculo.js, os dados fixos em config.js.
-import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-09-29b';
+import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-09-29c';
 import {
   MESES, encontrarCidade, filtrarCidades, calcularPerda, estaAberto, linkWhats,
   moeda, kwhTexto, mensagemDiagnostico, mensagemServico, telefoneValido,
-} from './calculo.js?v=2026-09-29b';
-import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-09-29b';
+} from './calculo.js?v=2026-09-29c';
+import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-09-29c';
 
 const $ = id => document.getElementById(id);
 const semAnimacao = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -208,7 +208,6 @@ $('calcForm').addEventListener('submit', e => {
   $('resMes').textContent = moeda(r.perdaReais / 12);
   $('resKwh').textContent = kwhTexto(r.perdaKwh);
   $('resPior').textContent = MESES[r.piorMes.indice] + ', ' + moeda(r.piorMes.reais);
-  $('reabrirValor').textContent = moeda(r.perdaReais);
 
   const msg = mensagemDiagnostico({
     placas: c.placas, potenciaW: c.potenciaW, kwp: r.kwp, cidade: cidade || c.cidadeTexto,
@@ -225,22 +224,37 @@ $('calcForm').addEventListener('submit', e => {
   ultimo = { esp: r.esperado, real: r.real, tarifa: c.tarifa };
   $('grafico').classList.remove('exemplo');
   desenhar();
-  abrirModalResultado();
+  moverResumoParaModal();
+  mostrarPasso('mrResumo');
+  abrirModal();
 });
 
 // ── Modal do resultado ───────────────────────────────────────────────────
+// #mrResumo é um nó só, que se move entre o modal (no cálculo, "salta na
+// cara") e o slot dentro da calculadora (depois de fechar, fica aberto ali
+// com os mesmos botões — pedido dele).
 const modalResultado = $('modalResultado');
+const mrCaixa = document.querySelector('#modalResultado .mr-caixa');
+const mrResumo = $('mrResumo');
+const calcResultadoSlot = $('calcResultadoSlot');
 let focoAntesModal = null;
 
 function mostrarPasso(idPasso) {
   modalResultado.querySelectorAll('.mr-passo').forEach(p => p.classList.toggle('on', p.id === idPasso));
-  modalResultado.querySelector('.mr-caixa').scrollTop = 0;
+  mrCaixa.scrollTop = 0;
 }
 
-function abrirModalResultado() {
+function moverResumoParaModal() {
+  if (mrResumo.parentElement !== mrCaixa) mrCaixa.insertBefore(mrResumo, $('mrDuvidas'));
+}
+
+function moverResumoParaSlot() {
+  mrResumo.classList.add('on');
+  calcResultadoSlot.appendChild(mrResumo);
+}
+
+function abrirModal() {
   focoAntesModal = document.activeElement;
-  mostrarPasso('mrResumo');
-  $('calcReabrir').classList.remove('on');
   modalResultado.classList.add('on');
   modalResultado.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
@@ -251,18 +265,23 @@ function fecharModalResultado() {
   modalResultado.classList.remove('on');
   modalResultado.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
-  $('calcReabrir').classList.add('on');
+  moverResumoParaSlot();
   if (focoAntesModal && focoAntesModal.focus) focoAntesModal.focus();
 }
 
 $('mrFechar').addEventListener('click', fecharModalResultado);
 $('mrFecharSucesso').addEventListener('click', fecharModalResultado);
-$('mrVoltar').addEventListener('click', () => mostrarPasso('mrResumo'));
+$('mrVoltar').addEventListener('click', () => {
+  // Se o resumo já está aberto fora do modal, "voltar" é só fechar.
+  if (mrResumo.parentElement === mrCaixa) mostrarPasso('mrResumo');
+  else fecharModalResultado();
+});
 $('ctaZap').addEventListener('click', fecharModalResultado);
-$('btnReabrir').addEventListener('click', abrirModalResultado);
 $('ctaDuvidas').addEventListener('click', () => {
   if (ultimoCalculo && !$('mCidade').value) $('mCidade').value = ultimoCalculo.cidade;
   mostrarPasso('mrDuvidas');
+  if (!modalResultado.classList.contains('on')) abrirModal();
+  $('mNome').focus();
 });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && modalResultado.classList.contains('on')) fecharModalResultado();

@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="css/style.css?v=2026-09-29b">
+<link rel="stylesheet" href="css/style.css?v=2026-09-29c">
 <link rel="preload" as="image" href="assets/hero-usina-mobile.webp" media="(max-width:700px)">
 <link rel="preload" as="image" href="assets/hero-usina.webp" media="(min-width:701px)">
 
@@ -59,7 +59,7 @@
   "sameAs": ["https://instagram.com/solargreensuporte"]
 }
 </script>
-<script type="module" src="js/app.js?v=2026-09-29b"></script>
+<script type="module" src="js/app.js?v=2026-09-29c"></script>
 </head>
 <body>
 <a class="pular" href="#principal">Pular para o conteúdo</a>
@@ -137,12 +137,9 @@
           <button class="calc-btn" id="btnCalc" type="submit">Calcular minha perda</button>
         </form>
 
-        <!-- Fica visível depois que a pessoa fecha o modal de resultado, pra não
-             perder o número calculado se rolar a página e voltar aqui. -->
-        <div class="calc-reabrir" id="calcReabrir">
-          <span>Sua perda estimada: <strong id="reabrirValor">R$ 0</strong>/ano</span>
-          <button type="button" id="btnReabrir">Ver detalhes</button>
-        </div>
+        <!-- Depois que o modal do resultado fecha, o #mrResumo (com os mesmos
+             botões) é movido pra cá e fica aberto, como era antes do modal. -->
+        <div class="calc-resultado-slot" id="calcResultadoSlot"></div>
       </div>
     </div>
   </div>
