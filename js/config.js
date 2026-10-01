@@ -10,7 +10,7 @@ export const EMPRESA = {
   email: 'solargreensuporte@gmail.com',
   instagram: 'solargreensuporte',
   endereco: {
-    rua: 'R. Municipalidade, 945',
+    rua: 'R. Municipalidade, 985',
     bairro: 'Umarizal',
     cidade: 'Belém',
     uf: 'PA',
