@@ -460,9 +460,6 @@ noscript .ns a{color:var(--verde);font-weight:700;}
 .pagina .botoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
 .pagina .btn-zap{color:var(--breu);}
 .pagina .btn-voltar{display:inline-flex;align-items:center;padding:12px 22px;border-radius:10px;border:1px solid var(--claro-linha);font-weight:700;font-size:.9rem;text-decoration:none;color:var(--claro-ink);}
-.tabela-cookies{width:100%;max-width:70ch;border-collapse:collapse;margin-top:14px;font-size:.92rem;}
-.tabela-cookies th,.tabela-cookies td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--claro-linha);color:var(--claro-soft);vertical-align:top;}
-.tabela-cookies th{color:var(--claro-ink);}
 
 /* Campo armadilha contra robô: fora da tela, sem foco e sem leitor de tela */
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}

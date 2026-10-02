@@ -65,7 +65,7 @@ export const LEADS = {
   tempoMinimoMs: 1500,              // formulário preenchido mais rápido que isso é marcado como suspeito
   maxEnviosPorSessao: 3,
   janelaEnviosMs: 10 * 60 * 1000,
-  privacidadeVersao: '2026-09-29',  // data da política aceita; tem que bater com privacidade.html
+  privacidadeVersao: '2026-10-01',  // data da política aceita; tem que bater com privacidade.html
 };
 
 // Só o harness de teste troca isto (por 'host:porta' do emulador). Em produção é null,
