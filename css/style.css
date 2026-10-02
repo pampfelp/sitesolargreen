@@ -62,6 +62,7 @@ header{
   position:sticky;top:0;z-index:40;background:var(--breu);
   border-bottom:1px solid var(--escuro-linha);
 }
+header.pagina-header{position:static;}
 /* padding-block, não o atalho: o atalho zeraria o padding lateral do .wrap
    (mesmo elemento carrega as duas classes) e o conteúdo colaria na borda. */
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;}
