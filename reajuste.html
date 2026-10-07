@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conta de luz subiu 6,7% no Pará | Solar Green Suporte</title>
+<meta name="description" content="A Aneel aprovou reajuste de 6,7% na conta de luz residencial da Equatorial Pará. Calcule quanto a sua usina solar está perdendo.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#06241a">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Solar Green Suporte">
+<meta property="og:title" content="Conta de luz subiu 6,7% no Pará | Solar Green Suporte">
+<meta property="og:description" content="Calcule quanto a sua usina solar está perdendo agora que cada kWh comprado da rede ficou mais caro.">
+<meta property="og:url" content="https://solargreensuporte.com.br/reajuste.html">
+<meta property="og:image" content="https://solargreensuporte.com.br/assets/og-home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css?v=2026-10-02a">
+<link rel="preload" as="image" href="assets/hero-reajuste-mobile.webp" media="(max-width:700px)">
+<link rel="preload" as="image" href="assets/hero-reajuste.webp" media="(min-width:701px)">
+
+<script type="module" src="js/app.js?v=2026-10-02a"></script>
+<style>
+/* Foto do próprio post que trouxe a pessoa até aqui. */
+.hero-bg{background-image:url('assets/hero-reajuste.webp');background-position:center 45%;}
+@media (max-width:700px){ .hero-bg{background-image:url('assets/hero-reajuste-mobile.webp');} }
+
+/* Selo e faixa de quatro cores, iguais ao card do Instagram. */
+.selo-noticia{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--escuro-ink);margin-bottom:18px;}
+.selo-noticia::before{content:"";width:4px;height:18px;background:#2662aa;border-radius:1px;}
+.faixa-noticia{height:5px;margin-top:22px;max-width:420px;border-radius:2px;
+  background:linear-gradient(90deg,#2662aa 0 21%,#9cb034 21% 50%,#d7232c 50% 79%,#f3b729 79% 100%);}
+.hero h1 .alta{color:var(--perda-texto);white-space:nowrap;}
+/* No celular, quem veio do post precisa ver a calculadora logo: os pontos saem. */
+@media (max-width:700px){ .hero-bg .hero-pontos{display:none;} .faixa-noticia{margin-top:20px;} }
+
+/* O botão do bloco leva até a calculadora sem ela ficar atrás do topo fixo. */
+#calc{scroll-margin-top:90px;}
+
+/* Bloco "por que pesa mais pra quem tem usina". */
+.reaj-fatos{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:38px;}
+.reaj-fato{background:var(--branco);border:1px solid var(--claro-linha);border-radius:14px;padding:20px 22px;}
+.reaj-fato .n{font-family:var(--display);font-weight:900;font-size:clamp(1.7rem,4vw,2.3rem);line-height:1;letter-spacing:-.02em;color:var(--claro-ink);}
+.reaj-fato .n.alta{color:var(--perda-claro);}
+.reaj-fato .l{font-size:.86rem;color:var(--claro-soft);margin-top:8px;}
+.reaj-cadeia{display:grid;grid-template-columns:1fr;gap:12px;}
+@media (min-width:860px){ .reaj-cadeia{grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;} }
+.reaj-elo{background:var(--branco);border:1px solid var(--claro-linha);border-radius:14px;padding:20px 22px;}
+.reaj-elo h3{margin-bottom:6px;}
+.reaj-elo p{font-size:.92rem;color:var(--claro-soft);line-height:1.55;}
+.reaj-elo.fim{border-color:rgba(192,52,42,.45);}
+.reaj-elo.fim h3{color:var(--perda-claro);}
+.reaj-seta{display:flex;align-items:center;justify-content:center;color:var(--claro-faint);}
+.reaj-seta svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transform:rotate(90deg);}
+@media (min-width:860px){ .reaj-seta svg{transform:none;} }
+.reaj-exemplo{margin-top:26px;font-size:.95rem;color:var(--claro-soft);max-width:70ch;}
+.reaj-exemplo b{color:var(--claro-ink);}
+.reaj-cta{margin-top:22px;display:inline-flex;align-items:center;gap:8px;background:var(--verde-texto);color:#fff;
+  font-weight:800;font-size:.92rem;padding:12px 20px;border-radius:10px;text-decoration:none;}
+.reaj-cta svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transform:rotate(-90deg);}
+</style>
+</head>
+<body>
+<a class="pular" href="#principal">Pular para o conteúdo</a>
+<noscript><div class="ns">Para calcular a perda da sua usina, ative o JavaScript. Se preferir, <a href="https://wa.me/5591987598592">fale com a gente no WhatsApp</a>.</div></noscript>
+
+<header>
+  <div class="wrap topbar">
+    <a class="logo" href="#topo" aria-label="Solar Green Suporte, ir para o topo"><img src="assets/logo-branca.svg" alt="Solar Green Suporte" width="118" height="44"></a>
+    <nav aria-label="Principal">
+      <a class="nav-link" href="#servicos">Serviços</a>
+      <a class="nav-link" href="#cobertura">Onde atendemos</a>
+      <a class="zap" href="https://wa.me/5591987598592" data-evento="whatsapp_topo" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="principal">
+
+<!-- ══ HERO + CALCULADORA ══ -->
+<div class="escuro hero-bg" id="topo">
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <span class="selo-noticia">Conta de luz | Pará</span>
+        <h1>A conta de luz subiu <span class="alta">6,7%</span>. Quanto a sua usina <em>está perdendo</em>?</h1>
+        <p>A Aneel aprovou o reajuste da Equatorial para cerca de 3,12 milhões de unidades consumidoras no Pará. Quem tem energia solar também sente, porque a usina gerando abaixo do esperado faz a casa comprar mais energia da rede, e cada kWh comprado ficou mais caro.</p>
+        <div class="faixa-noticia" aria-hidden="true"></div>
+        <ul class="hero-pontos">
+          <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Resultado na hora, em reais, sem precisar deixar contato</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Cálculo com a irradiação solar real da sua cidade, mês a mês</span></li>
+          <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Basta saber quantas placas tem, a cidade e há quanto tempo não faz limpeza. O resto já vem preenchido</span></li>
+        </ul>
+      </div>
+
+      <div class="calc" id="calc">
+        <h2 class="calc-t">Calcule quanto a sua usina está perdendo</h2>
+        <form id="calcForm" novalidate>
+          <div class="campos">
+            <div class="campo">
+              <label for="placas">Quantidade de placas</label>
+              <input type="number" id="placas" placeholder="Ex.: 12" min="1" step="1" inputmode="numeric">
+            </div>
+            <div class="campo">
+              <label for="potPlaca">Potência de cada placa (W)</label>
+              <input type="number" id="potPlaca" min="50" step="5" inputmode="numeric">
+              <span class="dica">585W é a média atual.</span>
+            </div>
+            <div class="campo full combo">
+              <label for="cidadeInput">Cidade</label>
+              <input type="text" id="cidadeInput" placeholder="Ex.: Belém" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="cidadeLista" aria-autocomplete="list">
+              <div class="combo-lista" id="cidadeLista" role="listbox" aria-label="Cidades"></div>
+              <span class="aviso-cidade" id="cidadeAviso" role="status"></span>
+            </div>
+            <div class="campo full">
+              <label for="tempoLimpeza">Há quanto tempo não faz limpeza ou manutenção</label>
+              <select id="tempoLimpeza" required></select>
+            </div>
+            <div class="campo full">
+              <label for="tarifa">Tarifa de energia (R$/kWh)</label>
+              <input type="number" id="tarifa" min="0.1" step="0.01" inputmode="decimal">
+              <span class="dica" id="tarifaDica">Está na sua conta de luz.</span>
+            </div>
+            <div class="campo full">
+              <details class="opcional">
+                <summary><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>Já sei o desempenho real da minha usina</summary>
+                <div class="campo">
+                  <label for="desempReal">Desempenho medido (%)</label>
+                  <input type="number" id="desempReal" min="1" max="120" step="1" placeholder="Ex.: 91" inputmode="numeric">
+                </div>
+              </details>
+            </div>
+          </div>
+          <p class="erro" id="calcErro" role="alert"></p>
+          <button class="calc-btn" id="btnCalc" type="submit">Calcular minha perda</button>
+        </form>
+
+        <!-- Depois que o modal do resultado fecha, o #mrResumo (com os mesmos
+             botões) é movido pra cá e fica aberto, como era antes do modal. -->
+        <div class="calc-resultado-slot" id="calcResultadoSlot"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ O REAJUSTE E A SUA USINA (só nesta página) ══ -->
+<div class="claro" id="reajuste">
+  <div class="wrap">
+    <section aria-labelledby="t-reajuste">
+      <div class="sec-head">
+        <span class="eyebrow">O reajuste e a sua usina</span>
+        <h2 id="t-reajuste">Por que quem tem energia solar também sente o aumento</h2>
+        <p class="lede">A usina abate da conta a energia que ela gera. Tudo o que ela deixa de gerar, a casa compra da Equatorial, e é nessa parte que o reajuste aparece.</p>
+      </div>
+      <div class="reaj-fatos">
+        <div class="reaj-fato"><div class="n alta">6,7%</div><div class="l">de reajuste na tarifa residencial da Equatorial Pará</div></div>
+        <div class="reaj-fato"><div class="n">3,12 mi</div><div class="l">de unidades consumidoras atingidas no estado</div></div>
+        <div class="reaj-fato"><div class="n">Aneel</div><div class="l">aprovou o novo valor em setembro de 2026</div></div>
+      </div>
+      <div class="reaj-cadeia">
+        <div class="reaj-elo"><h3>A usina gera menos</h3><p>Sujeira nas placas, conexão frouxa ou inversor com falha. Vista do chão, a usina parece igual a uma que está funcionando bem.</p></div>
+        <div class="reaj-seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="reaj-elo"><h3>A casa compra mais da rede</h3><p>A energia que faltou na geração vem da Equatorial e entra na conta no fim do mês.</p></div>
+        <div class="reaj-seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="reaj-elo fim"><h3>Cada kWh comprado custa mais</h3><p>Com o reajuste, a mesma perda de geração passa a pesar mais no bolso do que pesava antes.</p></div>
+      </div>
+      <p class="reaj-exemplo">Exemplo: uma usina de <b>12 placas em Belém</b>, há mais de um ano sem limpeza, deixa de gerar cerca de <b>1.800 kWh por ano</b>. É energia que a casa acaba comprando da rede, agora com a tarifa nova.</p>
+      <a class="reaj-cta" href="#calc">Calcular a perda da minha usina <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </section>
+  </div>
+</div>
+
+<!-- ══ DE ONDE VEM O NÚMERO ══ -->
+<div class="claro">
+  <div class="wrap">
+    <section aria-labelledby="t-numero">
+      <div class="sec-head">
+        <span class="eyebrow">Como a conta é feita</span>
+        <h2 id="t-numero">De onde vem esse número</h2>
+        <p class="lede">Cada cidade recebe uma quantidade diferente de sol, e essa quantidade muda todo mês. Em agosto a irradiação em Belém é 29% maior do que em março. Por isso a conta é feita mês a mês, com o dado do seu município.</p>
+      </div>
+      <div class="gr-leg">
+        <span><i class="kk" style="border:1.5px dashed #b3ccb8;"></i> Geração esperada</span>
+        <span><i class="kk" style="background:#4e9b00;"></i> Geração no desempenho atual</span>
+        <span><i class="kk" style="background:rgba(192,52,42,.35);"></i> O que fica pelo caminho</span>
+      </div>
+      <div class="grafico exemplo" id="grafico">
+        <p class="gr-exemplo-nota" id="grNota">Exemplo: 12 placas de 585 W em Belém, mais de 1 ano sem limpeza. Calcule a sua usina no topo da página.</p>
+        <div class="barras" id="barras" role="img" aria-label="Gráfico de barras, mês a mês, da geração esperada e da geração no desempenho atual"></div>
+        <div class="gr-tip" id="grTip"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══ QUEM SOMOS ══ -->
+<div class="branco" id="quem-somos">
+  <div class="wrap">
+    <section aria-labelledby="t-quem">
+      <div class="sec-head">
+        <span class="eyebrow">Quem somos</span>
+        <h2 id="t-quem">Uma equipe que nasceu para cuidar da sua usina de verdade</h2>
+        <p class="lede">A Solar Green Suporte nasceu pra cuidar do sistema solar depois que a instalação termina. A gente não vende usina nova: entra quando a usina já existe, e o trabalho é garantir que ela continue gerando o que prometeu. Ficamos em Belém e atendemos o Norte do Pará.</p>
+      </div>
+      <div class="carrossel" id="carrossel">
+        <div class="car-trilho" id="carTrilho"></div>
+        <button class="car-nav car-prev" id="carPrev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="car-nav car-next" id="carNext" type="button" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="car-pontos" id="carPontos"></div>
+      <div class="resp">
+        <div class="r-rot">Responsável técnico</div>
+        <div class="r-nome">Felipe Eduardo Pamplona de Sousa Nascimento</div>
+        <div class="r-cargo">Engenheiro eletricista</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══ SERVIÇOS ══ -->
+<div class="claro" id="servicos">
+  <div class="wrap">
+    <section aria-labelledby="t-servicos">
+      <div class="sec-head">
+        <span class="eyebrow">Serviços</span>
+        <h2 id="t-servicos">O que a gente faz</h2>
+      </div>
+      <div class="grid g4">
+        <div class="card">
+          <div class="ico-c"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></div>
+          <h3>Monitoramento</h3>
+          <p>Acompanhamos a geração pela plataforma do fabricante do inversor e mandamos um relatório comparando o esperado com o realizado.</p>
+          <button class="card-abrir" type="button" aria-expanded="false">Ver como funciona <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="card-mais"><div class="card-mais-int">
+            <p>Nosso aplicativo monitora a geração e a saúde da usina 24 horas por dia e manda um alerta se o desempenho cair abaixo do esperado. Dá pra anexar as faturas de energia no app, e ele compara a geração do mês com o abatimento na conta pra mostrar quanto você economizou naquele período.</p>
+            <a class="card-cta" href="https://wa.me/5591987598592" data-servico="monitoramento" data-evento="whatsapp_servico" target="_blank" rel="noopener">Falar sobre monitoramento</a>
+          </div></div>
+        </div>
+        <div class="card">
+          <div class="ico-c"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 1 1-5.7 5.7l-5 5V21h3l5-5a4 4 0 0 1 5.7-5.7z"/></svg></div>
+          <h3>Limpeza e manutenção</h3>
+          <p>Limpeza técnica dos módulos, reaperto das conexões elétricas e análise da geração no inversor. Equipe com EPI.</p>
+          <button class="card-abrir" type="button" aria-expanded="false">Ver como funciona <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="card-mais"><div class="card-mais-int">
+            <p>Além da limpeza detalhada em cada módulo, a gente confere se todas as conexões estão firmes, se os cabos estão íntegros, se as tubulações estão protegendo cabos e conexões, se o equipamento está configurado do jeito certo e se cada componente está funcionando como deveria.</p>
+            <a class="card-cta" href="https://wa.me/5591987598592" data-servico="limpeza e manutenção" data-evento="whatsapp_servico" target="_blank" rel="noopener">Falar sobre limpeza e manutenção</a>
+          </div></div>
+        </div>
+        <div class="card">
+          <div class="ico-c"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 3v6c0 4.4-3 8.4-7 9.5C8 20.4 5 16.4 5 12V6z"/></svg></div>
+          <h3>Regularização na Equatorial</h3>
+          <p>Ligação nova, aumento de carga, troca de titularidade e pedido de acesso para microgeração distribuída.</p>
+          <button class="card-abrir" type="button" aria-expanded="false">Ver como funciona <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="card-mais"><div class="card-mais-int">
+            <p>Representamos você junto à Equatorial, com o projeto elétrico assinado por engenheiro eletricista. Você não precisa entender de burocracia de concessionária nem ir atrás de protocolo: a gente cuida do processo do começo ao fim.</p>
+            <a class="card-cta" href="https://wa.me/5591987598592" data-servico="regularização na Equatorial" data-evento="whatsapp_servico" target="_blank" rel="noopener">Falar sobre regularização</a>
+          </div></div>
+        </div>
+        <div class="card">
+          <div class="ico-c"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></div>
+          <h3>Expansão da usina</h3>
+          <p>Consumindo mais do que o sistema é capaz de gerar? Calculamos a expansão necessária pra sua demanda.</p>
+          <button class="card-abrir" type="button" aria-expanded="false">Ver como funciona <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="card-mais"><div class="card-mais-int">
+            <p>Sua conta ainda vem alta mesmo com o sistema funcionando bem? Pode ser que ele tenha ficado pequeno pro seu consumo atual. A gente calcula quantos módulos faltam pra fechar essa conta, olhando pra sua demanda real.</p>
+            <a class="card-cta" href="https://wa.me/5591987598592" data-servico="expansão da usina" data-evento="whatsapp_servico" target="_blank" rel="noopener">Falar sobre expansão</a>
+          </div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══ ATENDIMENTO ══ -->
+<div class="escuro" id="atendimento">
+  <div class="wrap">
+    <section aria-labelledby="t-visita">
+      <div class="sec-head">
+        <span class="eyebrow">Atendimento</span>
+        <h2 id="t-visita">Como é uma visita</h2>
+      </div>
+      <div class="passos">
+        <div class="passo">
+          <h3>Diagnóstico e agendamento</h3>
+          <p>O consultor olha sua fatura e a geração dos últimos meses, e já aponta se existe perda. Depois marca a visita.</p>
+        </div>
+        <div class="seta-passo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="passo">
+          <h3>Vistoria</h3>
+          <p>Verificação visual dos módulos, do inversor e da rede. Depois os testes, pra ver se cada componente está no parâmetro certo. Por último, a configuração no aplicativo, pra achar trava interna na geração.</p>
+        </div>
+        <div class="seta-passo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="passo">
+          <h3>Relatório</h3>
+          <p>Laudo completo do que foi avaliado, assinado digitalmente. Junto vem o acesso à área do cliente, com geração estimada, realizada e comparativo da conta.</p>
+        </div>
+        <div class="seta-passo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="passo">
+          <h3>Acompanhamento</h3>
+          <p>Depois da vistoria, o primeiro mês de acompanhamento é por nossa conta. Depois disso você pode assinar o plano anual: aplicativo, monitoramento ativo, limpeza, vistoria e acompanhamento com a concessionária.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══ PROVA ══ -->
+<div class="claro">
+  <div class="wrap">
+    <section aria-labelledby="t-prova">
+      <div class="sec-head">
+        <span class="eyebrow">Experiência</span>
+        <h2 id="t-prova">Quem já passou por aqui</h2>
+      </div>
+      <div class="prova">
+        <div><div class="p-n">300+</div><div class="p-l">usinas salvas em Belém e no Norte do Pará</div></div>
+        <div><div class="p-n">1.100+</div><div class="p-l">clientes já assessorados pela Solar Green</div></div>
+        <div><div class="p-n">48h</div><div class="p-l">prazo máximo para avisar sobre falha grave</div></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══ COBERTURA ══ -->
+<div class="branco" id="cobertura">
+  <div class="wrap">
+    <section aria-labelledby="t-cobertura">
+      <div class="sec-head">
+        <span class="eyebrow">Cobertura</span>
+        <h2 id="t-cobertura">Onde a gente atende</h2>
+        <p class="lede">Belém e região metropolitana com visita mais rápida. Para o interior, o deslocamento entra no orçamento e é combinado antes. Não está na lista? Fale com a gente, que a gente confirma.</p>
+      </div>
+      <div class="cidades">
+        <span class="cidade">Belém</span><span class="cidade">Ananindeua</span><span class="cidade">Marituba</span>
+        <span class="cidade">Benevides</span><span class="cidade">Santa Izabel do Pará</span><span class="cidade">Santa Bárbara do Pará</span>
+        <span class="cidade">Castanhal</span><span class="cidade">Barcarena</span><span class="cidade">Abaetetuba</span>
+        <span class="cidade">Vigia</span><span class="cidade">Santo Antônio do Tauá</span><span class="cidade">Bujaru</span>
+        <span class="cidade">Acará</span><span class="cidade">Moju</span><span class="cidade">Tomé-Açu</span>
+        <span class="cidade">São Miguel do Guamá</span><span class="cidade">Capanema</span><span class="cidade">Bragança</span>
+        <span class="cidade">Salinópolis</span><span class="cidade">Soure</span><span class="cidade">Salvaterra</span>
+        <span class="cidade">Muaná</span><span class="cidade">Ponta de Pedras</span><span class="cidade">Breves</span>
+        <span class="cidade">Cametá</span><span class="cidade">Igarapé-Miri</span>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══ GARANTIA ══ -->
+<div class="claro">
+  <div class="wrap">
+    <section aria-labelledby="t-garantia">
+      <div class="sec-head">
+        <span class="eyebrow">Transparência</span>
+        <h2 id="t-garantia">O que a garantia cobre</h2>
+      </div>
+      <div class="gar">
+        <div class="gar-col">
+          <h3>Está coberto</h3>
+          <ul>
+            <li class="sim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>A mão de obra de todo serviço que a gente executa.</span></li>
+            <li class="sim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Abrir e acompanhar o chamado de garantia com o fabricante do equipamento, no seu lugar.</span></li>
+            <li class="sim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Relatório técnico com avaliação completa e registros fotográficos.</span></li>
+            <li class="sim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Sem fidelidade, saia quando quiser.</span></li>
+          </ul>
+        </div>
+        <div class="gar-col">
+          <h3>Não está coberto</h3>
+          <ul>
+            <li class="nao"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Defeito de fabricação do painel ou do inversor, que é garantia do fabricante.</span></li>
+            <li class="nao"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Dano causado por temporal, queda de árvore e outros eventos da natureza.</span></li>
+            <li class="nao"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Mau uso do sistema.</span></li>
+            <li class="nao"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>A quantidade de energia gerada, que depende do sol. O que garantimos é o equipamento funcionando como deveria.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══ CONTATO ══ -->
+<div class="escuro" id="contato">
+  <div class="wrap">
+    <section aria-labelledby="t-contato">
+      <div class="form-grid">
+        <div>
+          <span class="eyebrow">Contato</span>
+          <h2 id="t-contato" style="margin-top:12px;">Quer parar de pagar pela energia que a usina deixa de gerar?</h2>
+          <p class="lede" style="margin-top:14px;">Um consultor olha a sua conta e a geração dos últimos meses e diz se existe perda. No WhatsApp a resposta é mais rápida, de segunda a sexta das 8h às 18h. Fora desse horário, deixe seu contato que a gente responde no próximo dia útil.</p>
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
+            <a class="btn-zap" href="https://wa.me/5591987598592" data-evento="whatsapp_contato" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+              (91) 98759-8592
+            </a>
+            <a href="https://instagram.com/solargreensuporte" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;color:var(--escuro-soft);text-decoration:none;font-size:.88rem;font-weight:700;">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="3.7"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg>
+              @solargreensuporte
+            </a>
+          </div>
+        </div>
+
+        <div class="form-box">
+          <form id="form" novalidate>
+            <div class="campos">
+              <div class="campo full"><label for="fNome">Nome</label><input type="text" id="fNome" autocomplete="name" required></div>
+              <div class="campo full"><label for="fZap">WhatsApp</label><input type="tel" id="fZap" autocomplete="tel" inputmode="tel" required></div>
+              <div class="campo"><label for="fCidade">Cidade</label><input type="text" id="fCidade" autocomplete="address-level2"></div>
+              <div class="campo"><label for="fServico">O que você precisa</label>
+                <select id="fServico">
+                  <option>Limpeza e manutenção</option>
+                  <option>Monitoramento</option>
+                  <option>Regularização na Equatorial</option>
+                  <option>Expansão da usina</option>
+                  <option>Ainda não sei</option>
+                </select>
+              </div>
+            </div>
+            <div class="hp" aria-hidden="true"><label for="fSite">Não preencha este campo</label><input type="text" id="fSite" name="site_url" tabindex="-1" autocomplete="off"></div>
+            <label class="consent"><input type="checkbox" id="fOk" required><span>Autorizo a Solar Green a usar meus dados para entrar em contato. <a href="privacidade.html">Política de privacidade</a></span></label>
+            <p id="formErro" role="alert"></p>
+            <button class="calc-btn" id="btnForm" type="submit">Quero ser chamado</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-logo"><img src="assets/logo-branca.svg" alt="Solar Green Suporte" width="112" height="42" loading="lazy"></div>
+    <div class="f-grid">
+      <div>
+        <h3>O que fazemos</h3>
+        <p>Manutenção, monitoramento e regularização de sistemas de energia solar já instalados.</p>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <ul>
+          <li><a href="https://wa.me/5591987598592">(91) 98759-8592</a></li>
+          <li><a href="mailto:solargreensuporte@gmail.com">solargreensuporte@gmail.com</a></li>
+          <li>Segunda a sexta, 8h às 18h</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Endereço</h3>
+        <p>R. Municipalidade, 985<br>Umarizal, Belém/PA<br>CEP 66.050-350<br>Atendimento presencial com hora marcada</p>
+      </div>
+      <div>
+        <h3>Serviços</h3>
+        <ul>
+          <li><a href="#servicos">Monitoramento</a></li>
+          <li><a href="#servicos">Limpeza e manutenção</a></li>
+          <li><a href="#servicos">Regularização</a></li>
+          <li><a href="#servicos">Expansão</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-fim">
+      <span>&copy; <span id="ano">2026</span> Solar Green Suporte</span>
+      <span>Irradiação solar: Global Solar Atlas 2.0, Banco Mundial, Solargis (CC BY 4.0)</span>
+      <a href="privacidade.html">Política de privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<div class="barra-zap" id="barraZap">
+  <a class="btn-zap" href="https://wa.me/5591987598592" data-evento="whatsapp_barra" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+    Falar no WhatsApp
+  </a>
+  <span class="b-hor" id="barraHorario">Segunda a sexta, 8h às 18h</span>
+</div>
+
+<!-- ══ MODAL DO RESULTADO DA CALCULADORA ══ -->
+<div class="modal-resultado" id="modalResultado" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Resultado do cálculo">
+  <div class="mr-caixa">
+    <button class="mr-fechar" id="mrFechar" type="button">Continuar no site</button>
+
+    <div class="mr-passo on" id="mrResumo">
+      <div class="res-desemp"><span class="v" id="resDesemp">0%</span><span class="l">do desempenho esperado</span></div>
+      <div class="res-lbl">Nessa configuração, sua usina deixa de gerar</div>
+      <div class="res-n" id="resAno">R$ 0</div>
+      <div class="res-sub">por ano</div>
+      <div class="res-linhas">
+        <div class="res-item"><div class="v" id="resMes">R$ 0</div><div class="l">por mês</div></div>
+        <div class="res-item"><div class="v" id="resKwh">0 kWh</div><div class="l">perdidos no ano</div></div>
+        <div class="res-item"><div class="v" id="resPior">-</div><div class="l">pior mês</div></div>
+      </div>
+      <div class="res-cta mr-cta" id="resCta">
+        <a class="btn-zap" id="ctaZap" href="https://wa.me/5591987598592" data-evento="whatsapp_resultado" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          Resolver a perda agora
+        </a>
+        <button class="btn-form" id="ctaDuvidas" type="button">Tirar dúvidas</button>
+      </div>
+      <p class="res-horario" id="resHorario"></p>
+      <p class="res-fonte">Estimativa. Irradiação do Global Solar Atlas (Banco Mundial, Solargis), plano inclinado no ângulo ideal, com 20% de perdas normais do sistema. O número real depende de sombreamento, idade dos módulos e estado do inversor, medidos na vistoria.</p>
+    </div>
+
+    <div class="mr-passo" id="mrDuvidas">
+      <button class="mr-voltar" id="mrVoltar" type="button">&larr; Voltar ao resultado</button>
+      <h3>Deixe seu contato</h3>
+      <p class="lede" style="margin-top:6px;">A gente te chama no WhatsApp para explicar o resultado e combinar a vistoria.</p>
+      <form id="mrForm" novalidate>
+        <div class="campos">
+          <div class="campo full"><label for="mNome">Nome</label><input type="text" id="mNome" autocomplete="name" required></div>
+          <div class="campo full"><label for="mZap">WhatsApp</label><input type="tel" id="mZap" autocomplete="tel" inputmode="tel" required></div>
+          <div class="campo"><label for="mCidade">Cidade</label><input type="text" id="mCidade" autocomplete="address-level2"></div>
+          <div class="campo"><label for="mServico">O que você precisa</label>
+            <select id="mServico">
+              <option>Limpeza e manutenção</option>
+              <option>Monitoramento</option>
+              <option>Regularização na Equatorial</option>
+              <option>Expansão da usina</option>
+              <option>Ainda não sei</option>
+            </select>
+          </div>
+        </div>
+        <div class="hp" aria-hidden="true"><label for="mSite">Não preencha este campo</label><input type="text" id="mSite" name="site_url" tabindex="-1" autocomplete="off"></div>
+        <label class="consent"><input type="checkbox" id="mOk" required><span>Autorizo a Solar Green a usar meus dados para entrar em contato. <a href="privacidade.html">Política de privacidade</a></span></label>
+        <p class="erro" id="mrErro" role="alert"></p>
+        <button class="calc-btn" id="mrBtn" type="submit">Quero ser chamado</button>
+      </form>
+    </div>
+
+    <div class="mr-passo form-ok" id="mrSucesso">
+      <p>Recebemos seu contato. A gente chama você no WhatsApp em horário comercial.</p>
+      <a class="btn-zap" id="mrZapSucesso" href="https://wa.me/5591987598592" target="_blank" rel="noopener">Falar agora no WhatsApp</a>
+      <button class="mr-voltar" id="mrFecharSucesso" type="button">Continuar no site</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LIGHTBOX DE FOTOS ══ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Foto ampliada">
+  <button class="lb-fechar" id="lbFechar" type="button" aria-label="Fechar foto">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="lb-conteudo">
+    <img id="lbImg" src="" alt="">
+    <p class="lb-legenda" id="lbLegenda"></p>
+  </div>
+</div>
+
+</body>
+</html>
