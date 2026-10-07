@@ -8,7 +8,7 @@
 //   Contact       clique em qualquer botão de WhatsApp
 //   Lead          contato gravado no ERP; o eventID é o id do documento em leads_site,
 //                 o mesmo que a API de Conversões deve usar depois pra não contar em dobro
-import { RASTREIO } from './config.js?v=2026-10-07a';
+import { RASTREIO } from './config.js?v=2026-10-07b';
 
 const CHAVE = 'sg_cookies';
 const LEAD_PENDENTE = 'sg_lead_pendente';   // formulário de baixo sai da página antes do envio
@@ -53,8 +53,8 @@ function dispararLeadPendente() {
   if (id) enviar('track', 'Lead', { content_name: 'formulario_site' }, { eventID: id });
 }
 
-document.addEventListener('sg:calculo', e => {
-  enviar('trackCustom', 'CalculoPerda', { perda_ano: Math.round(e.detail.perdaAno || 0), cidade: e.detail.cidade || '' });
+document.addEventListener('sg:calculo', () => {
+  enviar('trackCustom', 'CalculoPerda');
 });
 
 document.addEventListener('sg:lead', e => {

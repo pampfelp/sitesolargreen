@@ -65,7 +65,7 @@ export const LEADS = {
   tempoMinimoMs: 1500,              // formulário preenchido mais rápido que isso é marcado como suspeito
   maxEnviosPorSessao: 3,
   janelaEnviosMs: 10 * 60 * 1000,
-  privacidadeVersao: '2026-10-01',  // data da política aceita; tem que bater com privacidade.html
+  privacidadeVersao: '2026-10-07',  // data da política aceita; tem que bater com privacidade.html
 };
 
 // Só o harness de teste troca isto (por 'host:porta' do emulador). Em produção é null,
@@ -76,6 +76,6 @@ export const EMULADOR = null;
 // carregado. O Pixel só liga depois que a pessoa aceita no aviso (rastreio.js).
 // `versaoAviso` sobe quando o que se mede mudar: quem já escolheu vê o aviso de novo.
 export const RASTREIO = {
-  metaPixelId: null,
+  metaPixelId: '931138243086320',
   versaoAviso: '2026-10-07',
 };
