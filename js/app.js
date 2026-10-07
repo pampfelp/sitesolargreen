@@ -1,13 +1,15 @@
 // Solar Green Suporte, site institucional. Tudo que mexe na tela fica aqui;
 // a conta e as regras ficam em calculo.js, os dados fixos em config.js.
-import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-10-02a';
+import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-10-07a';
 import {
   MESES, encontrarCidade, filtrarCidades, calcularPerda, estaAberto, linkWhats,
   moeda, kwhTexto, mensagemDiagnostico, mensagemServico, telefoneValido,
-} from './calculo.js?v=2026-10-02a';
-import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-10-02a';
+} from './calculo.js?v=2026-10-07a';
+import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-10-07a';
 
 const $ = id => document.getElementById(id);
+// Avisos para o rastreio.js (Pixel). Se ninguém escutar, não acontece nada.
+const avisar = (nome, detalhe) => document.dispatchEvent(new CustomEvent(nome, { detail: detalhe }));
 const semAnimacao = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ── Valores de saída dos campos e ano do rodapé ──────────────────────────
@@ -227,6 +229,7 @@ $('calcForm').addEventListener('submit', e => {
   moverResumoParaModal();
   mostrarPasso('mrResumo');
   abrirModal();
+  avisar('sg:calculo', { perdaAno: r.perdaReais, cidade: cidade || c.cidadeTexto });
 });
 
 // ── Modal do resultado ───────────────────────────────────────────────────
@@ -544,10 +547,11 @@ async function tentarEnviarLead(dados, ui) {
   botao.textContent = 'Enviando';
   const tempo = inicio ? Date.now() - inicio : 0;
   try {
-    await enviarLead(montarLead({ nome, zap, cidade, servico }, ultimoCalculo, {
+    const idLead = await enviarLead(montarLead({ nome, zap, cidade, servico }, ultimoCalculo, {
       pagina: location.pathname, ...utm, tempoPreenchimentoMs: tempo, suspeito: tempo < LEADS.tempoMinimoMs,
     }));
     registrarEnvio();
+    avisar('sg:lead', { id: idLead, saiDaPagina: !!ui.saiDaPagina });
     return 'ok';
   } catch (err) {
     botao.disabled = false;
@@ -580,7 +584,7 @@ formulario.addEventListener('submit', async e => {
   };
   const resultado = await tentarEnviarLead(
     { nome, zap, cidade, servico, site: $('fSite').value, consentimento: $('fOk').checked, inicio: inicioFormulario },
-    { botao: $('btnForm'), textoOcioso: 'Quero ser chamado', mostrarErro },
+    { botao: $('btnForm'), textoOcioso: 'Quero ser chamado', mostrarErro, saiDaPagina: true },
   );
   if (resultado === 'ok' || resultado === 'robo') window.location.href = 'obrigado.html';
 });

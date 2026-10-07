@@ -464,3 +464,24 @@ noscript .ns a{color:var(--verde);font-weight:700;}
 
 /* Campo armadilha contra robô: fora da tela, sem foco e sem leitor de tela */
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+
+/* Aviso de cookies (js/rastreio.js). Só aparece quando há Pixel configurado. */
+.aviso-cookies{
+  position:fixed;left:16px;right:16px;bottom:16px;z-index:60;max-width:760px;margin:0 auto;
+  background:var(--breu);color:var(--escuro-ink);border:1px solid var(--escuro-linha);border-radius:14px;
+  padding:16px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:.86rem;line-height:1.5;
+}
+.aviso-cookies[hidden]{display:none;}
+.aviso-cookies p{flex:1 1 320px;color:var(--escuro-soft);}
+.aviso-cookies a{color:var(--escuro-ink);}
+.ac-botoes{display:flex;gap:10px;flex:none;}
+.ac-botoes button{font:inherit;font-weight:800;font-size:.86rem;padding:10px 18px;border-radius:10px;cursor:pointer;}
+.ac-recusar{background:transparent;color:var(--escuro-ink);border:1px solid #3d8265;}
+.ac-aceitar{background:var(--verde);color:var(--breu);border:1px solid var(--verde);}
+@media (max-width:560px){
+  .aviso-cookies{left:10px;right:10px;bottom:10px;}
+  .ac-botoes{width:100%;}
+  .ac-botoes button{flex:1;}
+}
+.pref-cookies{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;}

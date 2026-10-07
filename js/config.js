@@ -71,3 +71,11 @@ export const LEADS = {
 // Só o harness de teste troca isto (por 'host:porta' do emulador). Em produção é null,
 // e o verificar-site.mjs recusa qualquer outro valor.
 export const EMULADOR = null;
+
+// Meta Pixel. Enquanto o ID for null, não aparece aviso de cookies e nada do Meta é
+// carregado. O Pixel só liga depois que a pessoa aceita no aviso (rastreio.js).
+// `versaoAviso` sobe quando o que se mede mudar: quem já escolheu vê o aviso de novo.
+export const RASTREIO = {
+  metaPixelId: null,
+  versaoAviso: '2026-10-07',
+};
