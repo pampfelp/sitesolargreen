@@ -2,8 +2,8 @@
 // O Firebase SDK só é baixado quando a pessoa envia o formulário (não pesa na
 // abertura da página). O site NUNCA grava em `funil` nem em `clientes`: grava na
 // antessala `leads_site`, que só aceita criação e nunca leitura; o ERP promove.
-import { FIREBASE, LEADS, EMULADOR } from './config.js?v=2026-10-07b';
-import { apenasDigitos } from './calculo.js?v=2026-10-07b';
+import { FIREBASE, LEADS, EMULADOR } from './config.js?v=2026-10-07c';
+import { apenasDigitos } from './calculo.js?v=2026-10-07c';
 
 const corta = (s, n) => String(s || '').trim().slice(0, n);
 const numeroEntre = (v, min, max) => typeof v === 'number' && isFinite(v) && v >= min && v <= max;

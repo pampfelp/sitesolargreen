@@ -8,7 +8,7 @@
 //   Contact       clique em qualquer botão de WhatsApp
 //   Lead          contato gravado no ERP; o eventID é o id do documento em leads_site,
 //                 o mesmo que a API de Conversões deve usar depois pra não contar em dobro
-import { RASTREIO } from './config.js?v=2026-10-07b';
+import { RASTREIO } from './config.js?v=2026-10-07c';
 
 const CHAVE = 'sg_cookies';
 const LEAD_PENDENTE = 'sg_lead_pendente';   // formulário de baixo sai da página antes do envio
@@ -77,31 +77,36 @@ document.addEventListener('click', e => {
 let aviso = null;
 
 function fecharAviso() {
-  if (aviso) aviso.hidden = true;
+  if (aviso && aviso.open) aviso.close();
   document.body.classList.remove('banner-aberto');
 }
 
 function abrirAviso() {
   if (!aviso) {
-    aviso = document.createElement('div');
+    aviso = document.createElement('dialog');
     aviso.className = 'aviso-cookies';
-    aviso.setAttribute('role', 'region');
-    aviso.setAttribute('aria-label', 'Aviso de cookies');
+    aviso.setAttribute('aria-labelledby', 'titulo-cookies');
     aviso.innerHTML =
-      '<p>Usamos cookies do Meta (Facebook e Instagram) para medir os nossos anúncios e mostrar a Solar Green a quem já visitou o site. ' +
-      'Se recusar, o site funciona do mesmo jeito. <a href="privacidade.html#cookies">Política de privacidade</a></p>' +
-      '<div class="ac-botoes"><button type="button" class="ac-recusar">Recusar</button><button type="button" class="ac-aceitar">Aceitar</button></div>';
+      '<h2 id="titulo-cookies" tabindex="-1">Deseja seguir para o site?</h2>' +
+      '<p>Ao selecionar “Seguir para o Site”, você aceita os cookies do Meta para medir anúncios e mostrar a Solar Green a quem já visitou o site. Você pode continuar sem cookies. ' +
+      '<a href="privacidade.html#cookies">Política de privacidade</a></p>' +
+      '<div class="ac-botoes"><button type="button" class="ac-aceitar">Seguir para o Site</button>' +
+      '<button type="button" class="ac-recusar">Continuar sem cookies</button></div>';
     aviso.querySelector('.ac-aceitar').addEventListener('click', () => { salvarEscolha('aceito'); fecharAviso(); ligarPixel(); });
-    aviso.querySelector('.ac-recusar').addEventListener('click', () => {
+    const recusar = () => {
       const tinhaAceitado = pixelLigado;
       salvarEscolha('recusado');
       fecharAviso();
       // O script do Meta já carregado não sai da memória; recarregar garante que para de medir.
       if (tinhaAceitado) location.reload();
-    });
+    };
+    aviso.querySelector('.ac-recusar').addEventListener('click', recusar);
+    aviso.addEventListener('cancel', e => { e.preventDefault(); recusar(); });
     document.body.appendChild(aviso);
   }
-  aviso.hidden = false;
+  if (aviso.open) return;
+  aviso.showModal();
+  aviso.querySelector('h2').focus();
   document.body.classList.add('banner-aberto');
 }
 
@@ -125,5 +130,5 @@ if (RASTREIO.metaPixelId) {
   ligarLinksPreferencia();
   const escolha = lerEscolha();
   if (escolha === 'aceito') ligarPixel();
-  else if (escolha !== 'recusado') abrirAviso();
+  else if (escolha !== 'recusado' && !(location.pathname.endsWith('/privacidade.html') && location.hash === '#cookies')) abrirAviso();
 }

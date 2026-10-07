@@ -467,21 +467,23 @@ noscript .ns a{color:var(--verde);font-weight:700;}
 
 /* Aviso de cookies (js/rastreio.js). Só aparece quando há Pixel configurado. */
 .aviso-cookies{
-  position:fixed;left:16px;right:16px;bottom:16px;z-index:60;max-width:760px;margin:0 auto;
+  position:fixed;inset:0;z-index:60;width:min(520px,calc(100% - 28px));max-height:calc(100% - 28px);margin:auto;
   background:var(--breu);color:var(--escuro-ink);border:1px solid var(--escuro-linha);border-radius:14px;
-  padding:16px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:.86rem;line-height:1.5;
+  padding:clamp(24px,4vw,36px);box-shadow:0 24px 70px rgba(0,0,0,.5);font-size:.9rem;line-height:1.6;
 }
-.aviso-cookies[hidden]{display:none;}
-.aviso-cookies p{flex:1 1 320px;color:var(--escuro-soft);}
+.aviso-cookies::backdrop{background:rgba(0,17,12,.78);backdrop-filter:blur(4px);}
+.aviso-cookies h2{font-size:clamp(1.3rem,4vw,1.8rem);margin-bottom:16px;}
+.aviso-cookies h2:focus{outline:none;}
+.aviso-cookies p{color:var(--escuro-soft);}
 .aviso-cookies a{color:var(--escuro-ink);}
-.ac-botoes{display:flex;gap:10px;flex:none;}
-.ac-botoes button{font:inherit;font-weight:800;font-size:.86rem;padding:10px 18px;border-radius:10px;cursor:pointer;}
-.ac-recusar{background:transparent;color:var(--escuro-ink);border:1px solid #3d8265;}
-.ac-aceitar{background:var(--verde);color:var(--breu);border:1px solid var(--verde);}
+.ac-botoes{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:26px;}
+.ac-botoes button{font:inherit;font-weight:800;cursor:pointer;}
+.ac-botoes .ac-recusar{background:transparent;color:var(--escuro-soft);border:0;padding:10px 0;font-weight:600;text-decoration:underline;text-underline-offset:3px;}
+.ac-aceitar{background:var(--verde);color:var(--breu);border:1px solid var(--verde);padding:12px 18px;border-radius:10px;}
 @media (max-width:560px){
-  .aviso-cookies{left:10px;right:10px;bottom:10px;}
-  .ac-botoes{width:100%;}
-  .ac-botoes button{flex:1;}
+  .ac-botoes{gap:8px;}
+  .ac-botoes button{font-size:.82rem;}
+  .ac-aceitar{padding:11px 12px;}
 }
+body.banner-aberto{overflow:hidden;}
 .pref-cookies{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;}
