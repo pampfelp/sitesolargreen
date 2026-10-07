@@ -1,11 +1,11 @@
 // Solar Green Suporte, site institucional. Tudo que mexe na tela fica aqui;
 // a conta e as regras ficam em calculo.js, os dados fixos em config.js.
-import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-10-07c';
+import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-10-07d';
 import {
   MESES, encontrarCidade, filtrarCidades, calcularPerda, estaAberto, linkWhats,
   moeda, kwhTexto, mensagemDiagnostico, mensagemServico, telefoneValido,
-} from './calculo.js?v=2026-10-07c';
-import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-10-07c';
+} from './calculo.js?v=2026-10-07d';
+import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-10-07d';
 
 const $ = id => document.getElementById(id);
 // Avisos para o rastreio.js (Pixel). Se ninguém escutar, não acontece nada.

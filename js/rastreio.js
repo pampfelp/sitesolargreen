@@ -8,7 +8,7 @@
 //   Contact       clique em qualquer botão de WhatsApp
 //   Lead          contato gravado no ERP; o eventID é o id do documento em leads_site,
 //                 o mesmo que a API de Conversões deve usar depois pra não contar em dobro
-import { RASTREIO } from './config.js?v=2026-10-07c';
+import { RASTREIO } from './config.js?v=2026-10-07d';
 
 const CHAVE = 'sg_cookies';
 const LEAD_PENDENTE = 'sg_lead_pendente';   // formulário de baixo sai da página antes do envio
@@ -90,8 +90,8 @@ function abrirAviso() {
       '<h2 id="titulo-cookies" tabindex="-1">Deseja seguir para o site?</h2>' +
       '<p>Ao selecionar “Seguir para o Site”, você aceita os cookies do Meta para medir anúncios e mostrar a Solar Green a quem já visitou o site. Você pode continuar sem cookies. ' +
       '<a href="privacidade.html#cookies">Política de privacidade</a></p>' +
-      '<div class="ac-botoes"><button type="button" class="ac-aceitar">Seguir para o Site</button>' +
-      '<button type="button" class="ac-recusar">Continuar sem cookies</button></div>';
+      '<div class="ac-botoes"><button type="button" class="ac-recusar">Continuar sem cookies</button>' +
+      '<button type="button" class="ac-aceitar">Seguir para o Site</button></div>';
     aviso.querySelector('.ac-aceitar').addEventListener('click', () => { salvarEscolha('aceito'); fecharAviso(); ligarPixel(); });
     const recusar = () => {
       const tinhaAceitado = pixelLigado;
