@@ -12,7 +12,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok     ' : 'FALHOU ') + msg); i
 const { EMPRESA } = await import(pathToFileURL(join(raiz, 'js/config.js')).href);
 const calc = await import(pathToFileURL(join(raiz, 'js/calculo.js')).href);
 
-const paginas = ['index.html', 'obrigado.html', 'privacidade.html', '404.html'];
+const paginas = ['index.html', 'conta-alta-energia-solar.html', 'obrigado.html', 'privacidade.html', '404.html'];
 const html = Object.fromEntries(paginas.map(p => [p, ler(p)]));
 const idx = html['index.html'];
 
@@ -30,6 +30,9 @@ ok((idx.match(/<h1[ >]/g) || []).length === 1, 'index: um h1 só');
 ok(!/noindex/i.test(idx) && !/noindex/i.test(html['privacidade.html']), 'index e privacidade sem noindex');
 ok(/noindex/.test(html['obrigado.html']) && /noindex/.test(html['404.html']), 'obrigado e 404 com noindex');
 ok(/<link rel="canonical" href="https:\/\/solargreensuporte\.com\.br\/">/.test(idx), 'index: canonical');
+ok(/<link rel="canonical" href="https:\/\/solargreensuporte\.com\.br\/conta-alta-energia-solar\.html">/.test(html['conta-alta-energia-solar.html']), 'conta alta: canonical');
+ok((html['conta-alta-energia-solar.html'].match(/<h1\b/g) || []).length === 1, 'conta alta: um h1 só');
+ok(idx.includes('href="conta-alta-energia-solar.html"'), 'home: link para conta alta');
 const desc = (idx.match(/name="description" content="([^"]+)"/) || [])[1] || '';
 ok(desc.length > 70 && desc.length <= 165, 'index: descrição com ' + desc.length + ' caracteres');
 const titulo = (idx.match(/<title>([^<]+)<\/title>/) || [])[1] || '';
