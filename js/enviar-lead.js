@@ -73,7 +73,21 @@ export async function enviarLead(lead) {
   // e serviço em 24 h viram "duplicado").
   const tempo = new Promise((_, rejeita) => setTimeout(() => rejeita(new Error('sem confirmação do servidor')), LEADS.timeoutMs));
   await Promise.race([gravacao, tempo]);
+  avisarErp(ref.id);
   return ref.id;
+}
+
+// Pede ao ERP o sorteio do vendedor e o push. sendBeacon porque a página sai
+// para obrigado.html logo em seguida e um fetch comum seria cortado. Falhar
+// aqui não perde o contato: o ERP promove sozinho quando alguém abrir.
+function avisarErp(id) {
+  if (EMULADOR || !LEADS.avisoUrl) return;
+  try {
+    const corpo = JSON.stringify({ action: 'avisarLeadSite', id });
+    if (!(navigator.sendBeacon && navigator.sendBeacon(LEADS.avisoUrl, corpo))) {
+      fetch(LEADS.avisoUrl, { method: 'POST', body: corpo, keepalive: true, mode: 'no-cors' }).catch(() => {});
+    }
+  } catch (e) { /* o ERP cobre */ }
 }
 
 // Tarifa de referência mantida pelo ERP (config_publica/site). Leitura por REST, sem

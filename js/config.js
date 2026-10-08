@@ -66,6 +66,9 @@ export const LEADS = {
   maxEnviosPorSessao: 3,
   janelaEnviosMs: 10 * 60 * 1000,
   privacidadeVersao: '2026-10-07',  // data da política aceita; tem que bater com privacidade.html
+  // Apps Script do ERP: depois de gravar, o site pede o sorteio do vendedor e o
+  // push pro celular dele (ação avisarLeadSite, que não usa a chave da API).
+  avisoUrl: 'https://script.google.com/macros/s/AKfycbzFCy8PyBZBODgA34xrlLTVUUNhKBIlguJT3ectH7Yus-VW1n41GcCclc5q_Yj0Di2O7g/exec',
 };
 
 // Só o harness de teste troca isto (por 'host:porta' do emulador). Em produção é null,
