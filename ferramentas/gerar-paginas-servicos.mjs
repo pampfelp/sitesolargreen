@@ -17,15 +17,15 @@ const paginas = [
   {
     file: 'manutencao-limpeza-energia-solar.html', event: 'manutencao_limpeza',
     title: 'Manutenção e limpeza de energia solar em Belém | Solar Green Suporte',
-    description: 'Sua usina solar está gerando menos? A Solar Green avalia geração, inversor, módulos e conexões e faz manutenção e limpeza em Belém e nas cidades atendidas.',
+    description: 'Manutenção e limpeza de energia solar em Belém, inclusive em usinas instaladas por terceiros. A Solar Green faz vistoria diagnóstica antes de intervir.',
     kicker: 'Cuidado com a sua usina', h1: 'Manutenção e limpeza de <em>energia solar</em> em Belém',
-    lede: 'Antes de limpar, verificamos a geração e o estado do sistema para entender o que está reduzindo o desempenho.',
+    lede: 'Atendemos também usinas instaladas por outras empresas. Antes de qualquer intervenção, fazemos uma vistoria diagnóstica para avaliar a condição e a geração do sistema.',
     cta: 'Quero avaliar minha usina', whatsapp: 'Olá! Quero avaliar a geração e a necessidade de manutenção ou limpeza da minha usina solar.',
     checksTitle: 'O que avaliamos', checks: ['Geração e alarmes', 'Placas e conexões', 'Inversor e cabos', 'Relatório fotográfico'],
-    stepsTitle: 'Manutenção começa pelo diagnóstico', steps: [
-      ['Analisamos a geração', 'Comparamos o histórico disponível e verificamos quedas de produção e possíveis alarmes.'],
-      ['Inspecionamos a instalação', 'Avaliamos módulos, conexões, inversor e componentes pertinentes ao serviço contratado.'],
-      ['Indicamos o próximo passo', 'Explicamos o que foi encontrado e combinamos limpeza, correção ou investigação adicional conforme o caso.'],
+    stepsTitle: 'Toda intervenção começa pela vistoria diagnóstica', steps: [
+      ['Entendemos o histórico', 'Reunimos os dados de geração disponíveis, verificamos quedas de produção e possíveis alarmes.'],
+      ['Fazemos a vistoria diagnóstica', 'Avaliamos módulos, conexões, inversor e demais componentes pertinentes, inclusive em usinas instaladas por terceiros.'],
+      ['Combinamos a intervenção', 'Explicamos o que foi encontrado e definimos com o cliente a limpeza, a correção ou uma investigação adicional antes de executar.'],
     ],
     cardsKicker: 'Sinais de atenção', cardsTitle: 'Quando vale investigar a usina?', cards: [
       ['Geração caiu', 'Uma queda persistente no aplicativo do inversor merece comparação com o histórico e a época do ano.'],
@@ -42,6 +42,7 @@ const paginas = [
     prepNote: 'A Solar Green registra o trabalho de limpeza e manutenção em relatório fotográfico conforme o escopo contratado. Correções adicionais são combinadas antes da execução. Não há promessa de economia específica sem medir o caso.',
     photo: { src: 'assets/fotos/Antes e depois da limpeza.jpg', alt: 'Registro de módulos antes e depois de limpeza da Solar Green', caption: 'Registro de antes e depois de limpeza do acervo da Solar Green.' },
     faqs: [
+      ['Vocês atendem usinas instaladas por outra empresa?', 'Sim. Fazemos primeiro uma vistoria diagnóstica para avaliar a instalação e seu desempenho. Só depois indicamos e combinamos qualquer intervenção.'],
       ['De quanto em quanto tempo devo limpar as placas?', 'A necessidade varia com o local, a chuva, a sujeira e o histórico de geração. Avaliar o desempenho é mais útil do que aplicar o mesmo prazo a todo telhado.'],
       ['A limpeza resolve toda conta alta?', `Não. Consumo maior, falha da usina e compensação na fatura são causas diferentes. Comece pela ${conta}.`],
       ['Toda manutenção inclui reparos?', 'O diagnóstico aponta o que precisa ser feito. O escopo da limpeza e de eventuais correções é combinado antes da execução.'],
