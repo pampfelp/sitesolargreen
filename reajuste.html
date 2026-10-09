@@ -24,27 +24,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="css/style.css?v=2026-10-09a">
+<link rel="stylesheet" href="css/style.css?v=2026-10-09b">
 <link rel="preload" as="image" href="assets/hero-reajuste-mobile.webp" media="(max-width:700px)">
 <link rel="preload" as="image" href="assets/hero-reajuste.webp" media="(min-width:701px)">
 
-<script type="module" src="js/app.js?v=2026-10-09a"></script>
-<script type="module" src="js/rastreio.js?v=2026-10-09a"></script>
-<style>
-.campanha .hero-bg{background-image:url('assets/hero-reajuste.webp');}
-.campanha .hero{padding-top:32px;}
-.campanha-nav{font-size:.8rem;font-weight:700;color:var(--escuro-ink);text-underline-offset:4px;}
-.selo-noticia{display:block;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--escuro-soft);margin-bottom:16px;}
-.campanha h1 .alta{color:var(--perda-texto);white-space:nowrap;}
-.hero p.noticia-fonte{font-size:.72rem;margin-top:12px;line-height:1.5;}
-.noticia-fonte a{color:var(--escuro-ink);}
-@media(max-width:700px){
-  .campanha .hero-bg{background-image:url('assets/hero-reajuste-mobile.webp');}
-  .campanha .hero h1{font-size:1.7rem;}
-  .campanha .hero p{font-size:.94rem;line-height:1.55;}
-  .campanha .hero-grid{gap:24px;}
-}
-</style>
+<script type="module" src="js/app.js?v=2026-10-09b"></script>
+<script type="module" src="js/rastreio.js?v=2026-10-09b"></script>
+<link rel="stylesheet" href="css/campanha.css?v=2026-10-09b">
 </head>
 <body class="campanha">
 <a class="pular" href="#principal">Pular para o conteúdo</a>
@@ -66,8 +52,9 @@
       <div>
         <span class="selo-noticia">Conta de luz | Pará</span>
         <h1>A conta de luz subiu <span class="alta">6,7%</span>. Quanto a sua usina <em>está perdendo</em>?</h1>
-        <p>A tarifa residencial da Equatorial Pará subiu em setembro de 2026. Se a sua usina gera menos, você compra mais energia da rede. E cada kWh comprado ficou mais caro.</p>
-        <p class="noticia-fonte">Fonte: <a href="https://www.gov.br/aneel/pt-br/assuntos/noticias/2026-defeso-eleitoral/aprovadas-as-novas-tarifas-da-equatorial-para" target="_blank" rel="noopener">ANEEL, reajuste da Equatorial Pará</a>.</p>
+        <p>Se a sua usina gera menos, você compra mais energia da rede. Com o reajuste de 6,7% da tarifa residencial no Pará, essa diferença pesa ainda mais na conta.</p>
+        <p class="noticia-teste"><strong>Faça o teste abaixo</strong> e veja a perda estimada da sua usina por mês e por ano.</p>
+        <p class="noticia-fonte">Fonte: <a href="https://www.gov.br/aneel/pt-br/assuntos/noticias/2026-defeso-eleitoral/aprovadas-as-novas-tarifas-da-equatorial-para" target="_blank" rel="noopener">ANEEL, reajuste da Equatorial Pará</a>, setembro de 2026.</p>
       </div>
       <div class="calc" id="calc">
         <h2 class="calc-t">Calcule quanto a sua usina está perdendo</h2>
@@ -87,9 +74,7 @@
               <label for="tempoLimpeza">Há quanto tempo não faz limpeza ou manutenção</label>
               <select id="tempoLimpeza" required></select>
             </div>
-            <div class="campo full">
-              <details class="opcional ajustes-calculo">
-                <summary>Conferir potência das placas e tarifa</summary>
+            <div class="campo full"><details class="opcional ajustes-calculo"><summary>Conferir potência das placas e tarifa</summary>
             <div class="campo">
               <label for="potPlaca">Potência de cada placa (W)</label>
               <input type="number" id="potPlaca" min="50" step="5" inputmode="numeric">
@@ -100,8 +85,7 @@
               <input type="number" id="tarifa" min="0.1" step="0.01" inputmode="decimal">
               <span class="dica" id="tarifaDica">Está na sua conta de luz.</span>
             </div>
-              </details>
-            </div>
+            </details></div>
             <div class="campo full">
               <details class="opcional">
                 <summary><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>Já sei o desempenho real da minha usina</summary>
@@ -116,7 +100,8 @@
           <button class="calc-btn" id="btnCalc" type="submit">Calcular minha perda</button>
         </form>
 
-        <!-- Resultado e contato ficam junto da calculadora. -->
+        <!-- Depois que o modal do resultado fecha, o #mrResumo (com os mesmos
+             botões) é movido pra cá e fica aberto, como era antes do modal. -->
         <div class="calc-resultado-slot" id="calcResultadoSlot"></div>
       </div>
     </div>
@@ -132,7 +117,6 @@
         <h2 id="t-quem">Quem cuida da sua usina</h2>
         <p class="lede">A Solar Green Suporte nasceu pra cuidar do sistema solar depois que a instalação termina. A gente não vende usina nova: entra quando a usina já existe, e o trabalho é garantir que ela continue gerando o que prometeu. Ficamos em Belém e atendemos o Norte do Pará.</p>
       </div>
-      <noscript><figure class="registro-estatico"><img src="assets/fotos/01 - Equipe em visita tecnica.jpg" width="600" height="1067" alt="Registro de visita técnica da Solar Green" loading="lazy"></figure></noscript>
       <div class="carrossel" id="carrossel">
         <div class="car-trilho" id="carTrilho"></div>
         <button class="car-nav car-prev" id="carPrev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>

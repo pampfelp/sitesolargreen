@@ -1,13 +1,14 @@
 // Solar Green Suporte, site institucional. Tudo que mexe na tela fica aqui;
 // a conta e as regras ficam em calculo.js, os dados fixos em config.js.
-import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-10-09a';
+import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-10-09b';
 import {
   MESES, encontrarCidade, filtrarCidades, calcularPerda, estaAberto, linkWhats,
   moeda, kwhTexto, mensagemDiagnostico, mensagemServico, telefoneValido,
-} from './calculo.js?v=2026-10-09a';
-import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-10-09a';
+} from './calculo.js?v=2026-10-09b';
+import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-10-09b';
 
 const $ = id => document.getElementById(id);
+const ehCampanha = document.body.classList.contains('campanha');
 // Avisos para o rastreio.js (Pixel). Se ninguém escutar, não acontece nada.
 const avisar = (nome, detalhe) => document.dispatchEvent(new CustomEvent(nome, { detail: detalhe }));
 const semAnimacao = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -226,13 +227,21 @@ $('calcForm').addEventListener('submit', e => {
   ultimo = { esp: r.esperado, real: r.real, tarifa: c.tarifa };
   $('grafico').classList.remove('exemplo');
   desenhar();
-  moverResumoParaSlot();
-  mrResumo.scrollIntoView({ behavior: semAnimacao ? 'instant' : 'smooth', block: 'start' });
+  if (ehCampanha) {
+    moverResumoParaSlot();
+    mrResumo.scrollIntoView({ behavior: semAnimacao ? 'instant' : 'smooth', block: 'start' });
+  } else {
+    moverResumoParaModal();
+    mostrarPasso('mrResumo');
+    abrirModal();
+  }
   avisar('sg:calculo', { perdaAno: r.perdaReais, cidade: cidade || c.cidadeTexto });
 });
 
 // ── Modal do resultado ───────────────────────────────────────────────────
-// O resultado fica na calculadora; o modal abre o formulário de contato.
+// #mrResumo é um nó só, que se move entre o modal (no cálculo, "salta na
+// cara") e o slot dentro da calculadora (depois de fechar, fica aberto ali
+// com os mesmos botões — pedido dele).
 const modalResultado = $('modalResultado');
 const mrCaixa = document.querySelector('#modalResultado .mr-caixa');
 const mrResumo = $('mrResumo');
@@ -242,6 +251,10 @@ let focoAntesModal = null;
 function mostrarPasso(idPasso) {
   modalResultado.querySelectorAll('.mr-passo').forEach(p => p.classList.toggle('on', p.id === idPasso));
   mrCaixa.scrollTop = 0;
+}
+
+function moverResumoParaModal() {
+  if (mrResumo.parentElement !== mrCaixa) mrCaixa.insertBefore(mrResumo, $('mrDuvidas'));
 }
 
 function moverResumoParaSlot() {
@@ -274,7 +287,7 @@ $('mrVoltar').addEventListener('click', () => {
 });
 $('ctaZap').addEventListener('click', fecharModalResultado);
 $('ctaDuvidas').addEventListener('click', () => {
-  if (ultimoCalculo) $('mCidade').value = ultimoCalculo.cidade;
+  if (ultimoCalculo && (ehCampanha || !$('mCidade').value)) $('mCidade').value = ultimoCalculo.cidade;
   mostrarPasso('mrDuvidas');
   if (!modalResultado.classList.contains('on')) abrirModal();
   $('mNome').focus();
@@ -440,6 +453,7 @@ function irPara(i, direcao) {
 }
 
 function reiniciarTimer() {
+  if (ehCampanha) return;
   clearInterval(timerCar);
   timerCar = setInterval(() => irPara(slideAtual + 1, 'proximo'), 5200);
 }
@@ -496,7 +510,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && lightbox.classList.contains('on')) fecharLightbox();
 });
 
-fetch('assets/fotos/fotos.json', { cache: 'no-cache' })   // revalida a cada visita: a lista muda sem trocar a URL
+fetch(ehCampanha ? 'assets/fotos/campanha/fotos.json' : 'assets/fotos/fotos.json', { cache: 'no-cache' })   // revalida a cada visita: a lista muda sem trocar a URL
   .then(r => { if (!r.ok) throw new Error('sem lista'); return r.json(); })
   .then(lista => { if (Array.isArray(lista) && lista.length) montarCarrossel(lista); else esconderCarrossel(); })
   .catch(esconderCarrossel);
@@ -582,7 +596,7 @@ formulario.addEventListener('submit', async e => {
   if (resultado === 'ok' || resultado === 'robo') window.location.href = 'obrigado.html';
 });
 
-// ── Formulário de contato sobre o resultado ────────────────────────────
+// ── Formulário "Tirar dúvidas" dentro do modal do resultado ─────────────
 const mrForm = $('mrForm');
 let inicioModal = 0;
 mrForm.addEventListener('input', () => { if (!inicioModal) inicioModal = Date.now(); });

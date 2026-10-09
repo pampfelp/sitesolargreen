@@ -25,11 +25,17 @@ def retirar(inicio, fim):
     a, b = intervalo(inicio, fim)
     html = html[:a] + html[b:]
 
-a, b = intervalo('<!-- ══ CALCULADORA ══ -->', '<!-- ══ DE ONDE VEM O NÚMERO ══ -->')
-secao_calc = html[a:b]
-calc_inicio = secao_calc.index('      <div class="calc" id="calc">')
-calc_fim = secao_calc.index('\n    </section>', calc_inicio)
-calc = secao_calc[calc_inicio:calc_fim]
+# Extrai a calculadora original da home e adapta apenas a campanha.
+a = html.index('      <div class="calc" id="calc">')
+b = html.index('\n    </div>\n  </div>\n</div>', a)
+calc = html[a:b]
+pot = re.search(r'            <div class="campo">\n              <label for="potPlaca">[\s\S]*?            </div>', calc).group()
+tarifa = re.search(r'            <div class="campo full">\n              <label for="tarifa">[\s\S]*?            </div>', calc).group()
+calc = calc.replace(pot + '\n', '').replace(tarifa + '\n', '')
+calc = calc.replace('<div class="campo">\n              <label for="placas">', '<div class="campo full">\n              <label for="placas">')
+needle = '            <div class="campo full">\n              <details class="opcional">'
+opcoes = '            <div class="campo full"><details class="opcional ajustes-calculo"><summary>Conferir potência das placas e tarifa</summary>\n' + pot + '\n' + tarifa + '\n            </details></div>\n'
+calc = calc.replace(needle, opcoes + needle)
 calc = calc.replace('Quanto sua usina está deixando de gerar', 'Calcule quanto a sua usina está perdendo')
 
 troca('<title>Manutenção de Energia Solar em Belém | Solar Green Suporte</title>',
@@ -57,8 +63,7 @@ html = html[:a] + '''<header class="pagina-header">
 ''' + html[b:]
 
 # A campanha mantém prova real, metodologia, cobertura e contato.
-retirar('<!-- ══ SERVIÇOS ══ -->', '<!-- ══ CALCULADORA ══ -->')
-retirar('<!-- ══ CALCULADORA ══ -->', '<!-- ══ DE ONDE VEM O NÚMERO ══ -->')
+retirar('<!-- ══ SERVIÇOS ══ -->', '<!-- ══ ATENDIMENTO ══ -->')
 retirar('<!-- ══ ATENDIMENTO ══ -->', '<!-- ══ PROVA ══ -->')
 retirar('<!-- ══ PROVA ══ -->', '<!-- ══ COBERTURA ══ -->')
 retirar('<!-- ══ GARANTIA ══ -->', '<!-- ══ CONTATO ══ -->')
@@ -71,8 +76,9 @@ hero = '''<!-- ══ NOTÍCIA + CALCULADORA ══ -->
       <div>
         <span class="selo-noticia">Conta de luz | Pará</span>
         <h1>A conta de luz subiu <span class="alta">6,7%</span>. Quanto a sua usina <em>está perdendo</em>?</h1>
-        <p>A tarifa residencial da Equatorial Pará subiu em setembro de 2026. Se a sua usina gera menos, você compra mais energia da rede. E cada kWh comprado ficou mais caro.</p>
-        <p class="noticia-fonte">Fonte: <a href="https://www.gov.br/aneel/pt-br/assuntos/noticias/2026-defeso-eleitoral/aprovadas-as-novas-tarifas-da-equatorial-para" target="_blank" rel="noopener">ANEEL, reajuste da Equatorial Pará</a>.</p>
+        <p>Se a sua usina gera menos, você compra mais energia da rede. Com o reajuste de 6,7% da tarifa residencial no Pará, essa diferença pesa ainda mais na conta.</p>
+        <p class="noticia-teste"><strong>Faça o teste abaixo</strong> e veja a perda estimada da sua usina por mês e por ano.</p>
+        <p class="noticia-fonte">Fonte: <a href="https://www.gov.br/aneel/pt-br/assuntos/noticias/2026-defeso-eleitoral/aprovadas-as-novas-tarifas-da-equatorial-para" target="_blank" rel="noopener">ANEEL, reajuste da Equatorial Pará</a>, setembro de 2026.</p>
       </div>
 ''' + calc + '''
     </div>
@@ -90,22 +96,17 @@ troca('<!-- ══ DE ONDE VEM O NÚMERO ══ -->', quem + '<!-- ══ DE OND
 troca('<h2 id="t-contato" style="margin-top:12px;">Fale com a gente</h2>',
       '<h2 id="t-contato" style="margin-top:12px;">Vamos conversar sobre a sua usina?</h2>')
 
-troca('</head>', '''<style>
-.campanha .hero-bg{background-image:url('assets/hero-reajuste.webp');}
-.campanha .hero{padding-top:32px;}
-.campanha-nav{font-size:.8rem;font-weight:700;color:var(--escuro-ink);text-underline-offset:4px;}
-.selo-noticia{display:block;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--escuro-soft);margin-bottom:16px;}
-.campanha h1 .alta{color:var(--perda-texto);white-space:nowrap;}
-.hero p.noticia-fonte{font-size:.72rem;margin-top:12px;line-height:1.5;}
-.noticia-fonte a{color:var(--escuro-ink);}
-@media(max-width:700px){
-  .campanha .hero-bg{background-image:url('assets/hero-reajuste-mobile.webp');}
-  .campanha .hero h1{font-size:1.7rem;}
-  .campanha .hero p{font-size:.94rem;line-height:1.55;}
-  .campanha .hero-grid{gap:24px;}
-}
-</style>
-</head>''')
+# Contato e rodapé específicos da campanha; home mantém a versão original.
+troca('aria-label="Resultado do cálculo"', 'aria-label="Contato sobre o resultado"')
+troca('<h2 id="t-quem">Uma equipe que nasceu para cuidar da sua usina de verdade</h2>', '<h2 id="t-quem">Quem cuida da sua usina</h2>')
+for id_campo in ['mCidade', 'mServico']:
+    troca('<div class="campo"><label for="' + id_campo + '">', '<div class="campo" hidden><label for="' + id_campo + '">')
+cta = re.search(r'        <a class="btn-zap" id="ctaZap"[\s\S]*?        </a>', html).group()
+botao = '<button class="btn-form" id="ctaDuvidas" type="button">Quero conversar sobre meu resultado</button>'
+html = html.replace(cta + '\n        <button class="btn-form" id="ctaDuvidas" type="button">Tirar dúvidas</button>', '        ' + botao + '\n' + cta.replace('Resolver a perda agora', 'Prefiro falar agora no WhatsApp'))
+for texto, destino in [('Monitoramento', 'monitoramento-energia-solar.html'), ('Limpeza e manutenção', 'manutencao-limpeza-energia-solar.html'), ('Regularização', 'fatura-equatorial-energia-solar.html')]:
+    troca('<a href="#servicos">' + texto + '</a>', '<a href="' + destino + '">' + texto + '</a>')
+troca('</head>', '<link rel="stylesheet" href="css/campanha.css?v=2026-10-09b">\n</head>')
 
 (RAIZ / 'reajuste.html').write_text(html, encoding='utf-8')
 print('reajuste.html gerado')

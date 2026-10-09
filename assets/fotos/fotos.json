@@ -1,14 +1,6 @@
 [
-  {
-    "arquivo": "01 - Equipe em visita tecnica.jpg",
-    "legenda": "Equipe em visita tecnica"
-  },
-  {
-    "arquivo": "02 - Orientacao sobre energia solar.jpg",
-    "legenda": "Orientacao sobre energia solar"
-  },
-  {
-    "arquivo": "Antes e depois da limpeza.jpg",
-    "legenda": "Antes e depois da limpeza"
-  }
+    {
+        "arquivo":  "Antes e depois da limpeza.jpg",
+        "legenda":  "Antes e depois da limpeza"
+    }
 ]

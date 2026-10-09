@@ -1,0 +1,39 @@
+/* Página do anúncio: alterações isoladas da home e dos serviços. */
+.campanha{padding-bottom:0;}
+.campanha .barra-zap{display:none;}
+.campanha header{position:static;}
+.campanha .hero-bg{background-image:url('../assets/hero-reajuste.webp');}
+.campanha .hero{padding-top:32px;}
+.campanha-nav{font-size:.8rem;font-weight:700;color:var(--escuro-ink);text-underline-offset:4px;}
+.campanha .selo-noticia{display:block;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--escuro-soft);margin-bottom:16px;}
+.campanha h1 .alta{color:var(--perda-texto);white-space:nowrap;}
+.campanha .hero p.noticia-fonte{font-size:.72rem;margin-top:12px;line-height:1.5;}
+.campanha .noticia-fonte a{color:var(--escuro-ink);}
+.campanha .noticia-teste strong{color:var(--escuro-ink);}
+.campanha #calc{scroll-margin-top:24px;}
+.campanha .ajustes-calculo summary{min-height:44px;}
+.campanha .calc .campos>.campo label{min-height:0;}
+.campanha [hidden]{display:none!important;}
+.campanha .mr-cta .btn-form{background:var(--verde);color:var(--breu);border-color:var(--verde);font-weight:800;}
+.campanha .mr-cta .btn-zap{background:transparent;color:var(--escuro-ink);border:1px solid var(--escuro-linha);font-size:.82rem;}
+.campanha #mrDuvidas .lede{color:var(--escuro-soft);}
+/* Uma imagem por vez, inteira e centralizada em qualquer largura. */
+.campanha .carrossel{width:100%;max-width:600px;margin-inline:auto;}
+.campanha .car-trilho,.campanha .car-trilho.unico{display:block;width:100%;max-width:none;margin:0;}
+.campanha .car-slide.car-lateral{display:none;}
+.campanha .car-slide.car-principal{width:100%;aspect-ratio:4/5;max-height:70svh;background:var(--breu);}
+.campanha .car-slide img{object-fit:contain;object-position:center;}
+.campanha .car-nav{width:44px;height:44px;}
+.campanha .car-prev{left:10px;}
+.campanha .car-next{right:10px;}
+.campanha .car-pontos{gap:0;padding:0;}
+.campanha .car-ponto{position:relative;width:44px;height:44px;background:transparent;}
+.campanha .car-ponto::after{content:'';position:absolute;width:7px;height:7px;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:4px;background:var(--claro-linha);}
+.campanha .car-ponto.on::after{background:var(--verde-fundo);width:20px;}
+@media(max-width:700px){
+  .campanha .hero-bg{background-image:url('../assets/hero-reajuste-mobile.webp');}
+  .campanha .hero h1{font-size:1.7rem;}
+  .campanha .hero p{font-size:.94rem;line-height:1.55;}
+  .campanha .hero-grid{gap:24px;}
+  .campanha .mr-caixa{padding-top:44px;}
+}
