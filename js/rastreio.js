@@ -8,7 +8,7 @@
 //   Contact       clique em qualquer botão de WhatsApp
 //   Lead          contato gravado no ERP; o eventID é o id do documento em leads_site,
 //                 o mesmo que a API de Conversões deve usar depois pra não contar em dobro
-import { RASTREIO } from './config.js?v=2026-10-09b';
+import { RASTREIO } from './config.js?v=2026-10-09c';
 
 const CHAVE = 'sg_cookies';
 const LEAD_PENDENTE = 'sg_lead_pendente';   // formulário de baixo sai da página antes do envio

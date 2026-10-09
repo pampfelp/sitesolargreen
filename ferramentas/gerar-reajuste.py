@@ -51,7 +51,7 @@ troca('<meta property="og:url" content="https://solargreensuporte.com.br/">',
       '<meta property="og:url" content="https://solargreensuporte.com.br/reajuste.html">')
 html = re.sub(r'<script type="application/ld\+json">[\s\S]*?</script>\n', '', html, count=1)
 html = html.replace('assets/hero-usina', 'assets/hero-reajuste')
-troca('<body>', '<body class="campanha">')
+troca('<body class="home">', '<body class="campanha">')
 troca('<a href="#servicos">Expansão</a>', '<a href="index.html#servicos">Expansão</a>')
 a, b = intervalo('<header>', '\n<main id="principal">')
 html = html[:a] + '''<header class="pagina-header">
@@ -106,7 +106,7 @@ botao = '<button class="btn-form" id="ctaDuvidas" type="button">Quero conversar 
 html = html.replace(cta + '\n        <button class="btn-form" id="ctaDuvidas" type="button">Tirar dúvidas</button>', '        ' + botao + '\n' + cta.replace('Resolver a perda agora', 'Prefiro falar agora no WhatsApp'))
 for texto, destino in [('Monitoramento', 'monitoramento-energia-solar.html'), ('Limpeza e manutenção', 'manutencao-limpeza-energia-solar.html'), ('Regularização', 'fatura-equatorial-energia-solar.html')]:
     troca('<a href="#servicos">' + texto + '</a>', '<a href="' + destino + '">' + texto + '</a>')
-troca('</head>', '<link rel="stylesheet" href="css/campanha.css?v=2026-10-09b">\n</head>')
+troca('</head>', '<link rel="stylesheet" href="css/campanha.css?v=2026-10-09c">\n</head>')
 
 (RAIZ / 'reajuste.html').write_text(html, encoding='utf-8')
 print('reajuste.html gerado')

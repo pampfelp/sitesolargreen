@@ -1,8 +1,8 @@
 // Lógica pura do site: conta da perda, busca de cidade, horário de atendimento
 // e mensagens de WhatsApp. Não toca no DOM, então roda no Node (verificar-site.mjs).
 
-import { EMPRESA, CALCULO } from './config.js?v=2026-10-09b';
-import { IRRADIACAO } from './irradiacao.js?v=2026-10-09b';
+import { EMPRESA, CALCULO } from './config.js?v=2026-10-09c';
+import { IRRADIACAO } from './irradiacao.js?v=2026-10-09c';
 
 export const MESES = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
 

@@ -488,3 +488,20 @@ noscript .ns a{color:var(--verde);font-weight:700;}
 }
 body.banner-aberto{overflow:hidden;}
 .pref-cookies{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;}
+
+/* Navegação por seções da home, com WhatsApp apenas no topo. */
+.home{padding-bottom:0;}
+.home .topbar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px 20px;}
+.home .menu-secoes{min-width:0;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--escuro-linha) transparent;}
+.home .menu-secoes .nav-link{display:block;flex:none;white-space:nowrap;font-size:.74rem;min-height:44px;line-height:44px;border-bottom:3px solid transparent;}
+.home .menu-secoes a[aria-current="location"]{color:var(--verde);border-bottom-color:var(--verde);}
+.home header .zap{padding:0;width:44px;height:44px;justify-content:center;}
+.home header .zap svg{width:24px;height:24px;}
+.home main>[id]{scroll-margin-top:calc(var(--altura-menu,120px) + 12px);}
+@media(max-width:1000px){
+  .home .topbar{grid-template-columns:minmax(0,1fr) auto;padding-block:10px;gap:4px 16px;}
+  .home .logo{grid-column:1;grid-row:1;}
+  .home header .zap{grid-column:2;grid-row:1;}
+  .home .menu-secoes{grid-column:1 / -1;grid-row:2;gap:20px;}
+  .home .menu-secoes .nav-link{font-size:.8rem;}
+}

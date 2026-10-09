@@ -1,17 +1,53 @@
 // Solar Green Suporte, site institucional. Tudo que mexe na tela fica aqui;
 // a conta e as regras ficam em calculo.js, os dados fixos em config.js.
-import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-10-09b';
+import { EMPRESA, CALCULO, TEMPO_SEM_LIMPEZA, EXEMPLO, LEADS } from './config.js?v=2026-10-09c';
 import {
   MESES, encontrarCidade, filtrarCidades, calcularPerda, estaAberto, linkWhats,
   moeda, kwhTexto, mensagemDiagnostico, mensagemServico, telefoneValido,
-} from './calculo.js?v=2026-10-09b';
-import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-10-09b';
+} from './calculo.js?v=2026-10-09c';
+import { montarLead, enviarLead, buscarTarifa } from './enviar-lead.js?v=2026-10-09c';
 
 const $ = id => document.getElementById(id);
 const ehCampanha = document.body.classList.contains('campanha');
 // Avisos para o rastreio.js (Pixel). Se ninguém escutar, não acontece nada.
 const avisar = (nome, detalhe) => document.dispatchEvent(new CustomEvent(nome, { detail: detalhe }));
 const semAnimacao = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Menu da home: acompanha a seção visível, sem alterar a página do anúncio.
+const menuSecoes = document.querySelector('[data-menu-secoes]');
+if (menuSecoes) {
+  const cabecalho = document.querySelector('header');
+  const links = [...menuSecoes.querySelectorAll('a[href^="#"]')];
+  const secoes = links.map(link => document.querySelector(link.getAttribute('href')));
+  let ativo = null;
+  let agendado = false;
+  function atualizarMenu() {
+    agendado = false;
+    const altura = cabecalho.getBoundingClientRect().height;
+    document.body.style.setProperty('--altura-menu', altura + 'px');
+    let indice = 0;
+    secoes.forEach((secao, i) => { if (secao.getBoundingClientRect().top <= altura + 32) indice = i; });
+    if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) indice = links.length - 1;
+    if (ativo === links[indice]) return;
+    ativo = links[indice];
+    links.forEach(link => {
+      if (link === ativo) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (menuSecoes.scrollWidth > menuSecoes.clientWidth) {
+      const caixa = menuSecoes.getBoundingClientRect();
+      const item = ativo.getBoundingClientRect();
+      menuSecoes.scrollTo({left:menuSecoes.scrollLeft + item.left - caixa.left - (caixa.width - item.width) / 2, behavior:semAnimacao ? 'instant' : 'smooth'});
+    }
+  }
+  function agendarMenu() {
+    if (!agendado) { agendado = true; requestAnimationFrame(atualizarMenu); }
+  }
+  window.addEventListener('scroll', agendarMenu, {passive:true});
+  window.addEventListener('resize', agendarMenu);
+  if ('ResizeObserver' in window) new ResizeObserver(agendarMenu).observe(cabecalho);
+  atualizarMenu();
+}
 
 // ── Valores de saída dos campos e ano do rodapé ──────────────────────────
 $('potPlaca').value = CALCULO.POTENCIA_PLACA_W;
@@ -61,7 +97,7 @@ function atualizarHorario() {
     '). Respondemos no próximo dia útil.';
   $('resCta').classList.toggle('fechado', !aberto);
   $('resHorario').textContent = aberto ? EMPRESA.horario.texto + '.' : foraTxt;
-  $('barraHorario').textContent = aberto ? EMPRESA.horario.texto : 'Fora do horário. Respondemos no próximo dia útil.';
+  if ($('barraHorario')) $('barraHorario').textContent = aberto ? EMPRESA.horario.texto : 'Fora do horário. Respondemos no próximo dia útil.';
 }
 atualizarHorario();
 setInterval(atualizarHorario, 60000);
