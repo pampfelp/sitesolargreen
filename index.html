@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="css/style.css?v=2026-10-07d">
+<link rel="stylesheet" href="css/style.css?v=2026-10-09a">
 <link rel="preload" as="image" href="assets/hero-usina-mobile.webp" media="(max-width:700px)">
 <link rel="preload" as="image" href="assets/hero-usina.webp" media="(min-width:701px)">
 
@@ -59,8 +59,8 @@
   "sameAs": ["https://instagram.com/solargreensuporte"]
 }
 </script>
-<script type="module" src="js/app.js?v=2026-10-07d"></script>
-<script type="module" src="js/rastreio.js?v=2026-10-07d"></script>
+<script type="module" src="js/app.js?v=2026-10-09a"></script>
+<script type="module" src="js/rastreio.js?v=2026-10-09a"></script>
 </head>
 <body>
 <a class="pular" href="#principal">Pular para o conteúdo</a>
@@ -89,6 +89,10 @@
       <div>
         <h1>Sua usina está gerando <em>o que deveria</em>?</h1>
         <p>A gente cuida de sistemas de energia solar que já estão instalados. Limpeza, manutenção, monitoramento e regularização, em Belém e no Norte do Pará.</p>
+        <div class="hero-acoes">
+          <a class="calc-btn" href="#servicos">Encontre o que você precisa</a>
+          <a class="hero-secundario" href="#calc">Calcular a perda da minha usina</a>
+        </div>
         <ul class="hero-pontos">
           <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Cálculo com a irradiação solar real da sua cidade, mês a mês</span></li>
           <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Relatório com foto, assinado eletronicamente, depois de cada visita</span></li>
@@ -96,100 +100,11 @@
         </ul>
       </div>
 
-      <div class="calc" id="calc">
-        <h2 class="calc-t">Quanto sua usina está deixando de gerar</h2>
-        <form id="calcForm" novalidate>
-          <div class="campos">
-            <div class="campo">
-              <label for="placas">Quantidade de placas</label>
-              <input type="number" id="placas" placeholder="Ex.: 12" min="1" step="1" inputmode="numeric">
-            </div>
-            <div class="campo">
-              <label for="potPlaca">Potência de cada placa (W)</label>
-              <input type="number" id="potPlaca" min="50" step="5" inputmode="numeric">
-              <span class="dica">585W é a média atual.</span>
-            </div>
-            <div class="campo full combo">
-              <label for="cidadeInput">Cidade</label>
-              <input type="text" id="cidadeInput" placeholder="Ex.: Belém" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="cidadeLista" aria-autocomplete="list">
-              <div class="combo-lista" id="cidadeLista" role="listbox" aria-label="Cidades"></div>
-              <span class="aviso-cidade" id="cidadeAviso" role="status"></span>
-            </div>
-            <div class="campo full">
-              <label for="tempoLimpeza">Há quanto tempo não faz limpeza ou manutenção</label>
-              <select id="tempoLimpeza" required></select>
-            </div>
-            <div class="campo full">
-              <label for="tarifa">Tarifa de energia (R$/kWh)</label>
-              <input type="number" id="tarifa" min="0.1" step="0.01" inputmode="decimal">
-              <span class="dica" id="tarifaDica">Está na sua conta de luz.</span>
-            </div>
-            <div class="campo full">
-              <details class="opcional">
-                <summary><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>Já sei o desempenho real da minha usina</summary>
-                <div class="campo">
-                  <label for="desempReal">Desempenho medido (%)</label>
-                  <input type="number" id="desempReal" min="1" max="120" step="1" placeholder="Ex.: 91" inputmode="numeric">
-                </div>
-              </details>
-            </div>
-          </div>
-          <p class="erro" id="calcErro" role="alert"></p>
-          <button class="calc-btn" id="btnCalc" type="submit">Calcular minha perda</button>
-        </form>
-
-        <!-- Depois que o modal do resultado fecha, o #mrResumo (com os mesmos
-             botões) é movido pra cá e fica aberto, como era antes do modal. -->
-        <div class="calc-resultado-slot" id="calcResultadoSlot"></div>
-      </div>
+      <figure class="hero-equipe">
+        <img src="assets/fotos/01 - Equipe em visita tecnica.jpg" alt="Registro da equipe da Solar Green durante uma visita técnica" width="600" height="1067" fetchpriority="high">
+        <figcaption>A Solar Green começa pela vistoria diagnóstica, inclusive em usinas instaladas por outras empresas.</figcaption>
+      </figure>
     </div>
-  </div>
-</div>
-
-<!-- ══ DE ONDE VEM O NÚMERO ══ -->
-<div class="claro">
-  <div class="wrap">
-    <section aria-labelledby="t-numero">
-      <div class="sec-head">
-        <span class="eyebrow">Como a conta é feita</span>
-        <h2 id="t-numero">De onde vem esse número</h2>
-        <p class="lede">Cada cidade recebe uma quantidade diferente de sol, e essa quantidade muda todo mês. Em agosto a irradiação em Belém é 29% maior do que em março. Por isso a conta é feita mês a mês, com o dado do seu município.</p>
-      </div>
-      <div class="gr-leg">
-        <span><i class="kk" style="border:1.5px dashed #b3ccb8;"></i> Geração esperada</span>
-        <span><i class="kk" style="background:#4e9b00;"></i> Geração no desempenho atual</span>
-        <span><i class="kk" style="background:rgba(192,52,42,.35);"></i> O que fica pelo caminho</span>
-      </div>
-      <div class="grafico exemplo" id="grafico">
-        <p class="gr-exemplo-nota" id="grNota">Exemplo: 12 placas de 585 W em Belém, mais de 1 ano sem limpeza. Calcule a sua usina no topo da página.</p>
-        <div class="barras" id="barras" role="img" aria-label="Gráfico de barras, mês a mês, da geração esperada e da geração no desempenho atual"></div>
-        <div class="gr-tip" id="grTip"></div>
-      </div>
-    </section>
-  </div>
-</div>
-
-<!-- ══ QUEM SOMOS ══ -->
-<div class="branco" id="quem-somos">
-  <div class="wrap">
-    <section aria-labelledby="t-quem">
-      <div class="sec-head">
-        <span class="eyebrow">Quem somos</span>
-        <h2 id="t-quem">Uma equipe que nasceu para cuidar da sua usina de verdade</h2>
-        <p class="lede">A Solar Green Suporte nasceu pra cuidar do sistema solar depois que a instalação termina. A gente não vende usina nova: entra quando a usina já existe, e o trabalho é garantir que ela continue gerando o que prometeu. Ficamos em Belém e atendemos o Norte do Pará.</p>
-      </div>
-      <div class="carrossel" id="carrossel">
-        <div class="car-trilho" id="carTrilho"></div>
-        <button class="car-nav car-prev" id="carPrev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <button class="car-nav car-next" id="carNext" type="button" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-      </div>
-      <div class="car-pontos" id="carPontos"></div>
-      <div class="resp">
-        <div class="r-rot">Responsável técnico</div>
-        <div class="r-nome">Felipe Eduardo Pamplona de Sousa Nascimento</div>
-        <div class="r-cargo">Engenheiro eletricista</div>
-      </div>
-    </section>
   </div>
 </div>
 
@@ -199,8 +114,17 @@
     <section aria-labelledby="t-servicos">
       <div class="sec-head">
         <span class="eyebrow">Serviços</span>
-        <h2 id="t-servicos">O que a gente faz</h2>
+        <h2 id="t-servicos">O que você precisa resolver?</h2>
       </div>
+      <div class="problemas-grid">
+<a class="card problema" href="conta-alta-energia-solar.html"><h3>A conta subiu ou a geração caiu</h3><p>Entenda o que pode estar acontecendo com a sua usina.</p><span>Ver como podemos ajudar <span aria-hidden="true">→</span></span></a>
+<a class="card problema" href="manutencao-limpeza-energia-solar.html"><h3>Limpeza e manutenção</h3><p>Veja como avaliamos placas, conexões e inversor.</p><span>Ver como podemos ajudar <span aria-hidden="true">→</span></span></a>
+<a class="card problema" href="monitoramento-energia-solar.html"><h3>Acompanhar a geração</h3><p>Conheça o monitoramento da sua usina.</p><span>Ver como podemos ajudar <span aria-hidden="true">→</span></span></a>
+<a class="card problema" href="fatura-equatorial-energia-solar.html"><h3>Fatura da Equatorial</h3><p>Entenda cobrança, compensação e regularização.</p><span>Ver como podemos ajudar <span aria-hidden="true">→</span></span></a>
+<a class="card problema" href="goteira-telhado-energia-solar.html"><h3>Goteira no telhado com solar</h3><p>Veja como investigamos a origem do problema.</p><span>Ver como podemos ajudar <span aria-hidden="true">→</span></span></a>
+<a class="card problema" href="diagnostico-rede-eletrica-consultoria.html"><h3>Problema na rede elétrica</h3><p>Conheça o diagnóstico e a consultoria de energia.</p><span>Ver como podemos ajudar <span aria-hidden="true">→</span></span></a>
+</div>
+      <h3 class="servicos-subtitulo">Serviços para a sua usina</h3>
       <div class="grid g4">
         <div class="card">
           <div class="ico-c"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></div>
@@ -243,17 +167,117 @@
           </div></div>
         </div>
       </div>
-      <p class="lede" style="margin-top:26px;">A fatura subiu mesmo com energia solar? <a href="conta-alta-energia-solar.html" style="color:var(--verde-texto);font-weight:800;">Veja como investigamos a conta alta</a>.</p>
-      <nav aria-label="Guias de serviços e problemas frequentes" style="margin-top:20px;">
-        <p class="lede">Veja também como a Solar Green pode ajudar em cada situação:</p>
-        <ul style="display:flex;flex-wrap:wrap;gap:12px 24px;list-style:none;padding:0;margin:12px 0 0;">
-          <li><a href="manutencao-limpeza-energia-solar.html" style="color:var(--verde-texto);font-weight:800;">Manutenção e limpeza</a></li>
-          <li><a href="monitoramento-energia-solar.html" style="color:var(--verde-texto);font-weight:800;">Monitoramento</a></li>
-          <li><a href="fatura-equatorial-energia-solar.html" style="color:var(--verde-texto);font-weight:800;">Fatura da Equatorial</a></li>
-          <li><a href="goteira-telhado-energia-solar.html" style="color:var(--verde-texto);font-weight:800;">Goteira com placas solares</a></li>
-          <li><a href="diagnostico-rede-eletrica-consultoria.html" style="color:var(--verde-texto);font-weight:800;">Diagnóstico elétrico e consultoria</a></li>
-        </ul>
-      </nav>
+    </section>
+  </div>
+</div>
+
+<!-- ══ CALCULADORA ══ -->
+<div class="escuro" id="calcular">
+  <div class="wrap">
+    <section class="calculo-secao" aria-labelledby="t-calculo">
+      <div class="sec-head">
+        <span class="eyebrow">Geração e desempenho</span>
+        <h2 id="t-calculo">Quanto a falta de manutenção pesa na sua usina?</h2>
+        <p class="lede">Informe os dados do sistema e o tempo desde a última limpeza para estimar o desempenho e a perda em reais.</p>
+      </div>
+      <div class="calc" id="calc">
+        <h2 class="calc-t">Quanto sua usina está deixando de gerar</h2>
+        <form id="calcForm" novalidate>
+          <div class="campos">
+            <div class="campo full">
+              <label for="placas">Quantidade de placas</label>
+              <input type="number" id="placas" placeholder="Ex.: 12" min="1" step="1" inputmode="numeric">
+            </div>
+            <div class="campo full combo">
+              <label for="cidadeInput">Cidade</label>
+              <input type="text" id="cidadeInput" placeholder="Ex.: Belém" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="cidadeLista" aria-autocomplete="list">
+              <div class="combo-lista" id="cidadeLista" role="listbox" aria-label="Cidades"></div>
+              <span class="aviso-cidade" id="cidadeAviso" role="status"></span>
+            </div>
+            <div class="campo full">
+              <label for="tempoLimpeza">Há quanto tempo não faz limpeza ou manutenção</label>
+              <select id="tempoLimpeza" required></select>
+            </div>
+            <div class="campo full">
+              <details class="opcional ajustes-calculo">
+                <summary>Conferir potência das placas e tarifa</summary>
+            <div class="campo">
+              <label for="potPlaca">Potência de cada placa (W)</label>
+              <input type="number" id="potPlaca" min="50" step="5" inputmode="numeric">
+              <span class="dica">585W é a média atual.</span>
+            </div>
+            <div class="campo full">
+              <label for="tarifa">Tarifa de energia (R$/kWh)</label>
+              <input type="number" id="tarifa" min="0.1" step="0.01" inputmode="decimal">
+              <span class="dica" id="tarifaDica">Está na sua conta de luz.</span>
+            </div>
+              </details>
+            </div>
+            <div class="campo full">
+              <details class="opcional">
+                <summary><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>Já sei o desempenho real da minha usina</summary>
+                <div class="campo">
+                  <label for="desempReal">Desempenho medido (%)</label>
+                  <input type="number" id="desempReal" min="1" max="120" step="1" placeholder="Ex.: 91" inputmode="numeric">
+                </div>
+              </details>
+            </div>
+          </div>
+          <p class="erro" id="calcErro" role="alert"></p>
+          <button class="calc-btn" id="btnCalc" type="submit">Calcular minha perda</button>
+        </form>
+
+        <!-- Resultado e contato ficam junto da calculadora. -->
+        <div class="calc-resultado-slot" id="calcResultadoSlot"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══ DE ONDE VEM O NÚMERO ══ -->
+<div class="claro">
+  <div class="wrap">
+    <section aria-labelledby="t-numero">
+      <div class="sec-head">
+        <span class="eyebrow">Como a conta é feita</span>
+        <h2 id="t-numero">De onde vem esse número</h2>
+        <p class="lede">Cada cidade recebe uma quantidade diferente de sol, e essa quantidade muda todo mês. Em agosto a irradiação em Belém é 29% maior do que em março. Por isso a conta é feita mês a mês, com o dado do seu município.</p>
+      </div>
+      <div class="gr-leg">
+        <span><i class="kk" style="border:1.5px dashed #b3ccb8;"></i> Geração esperada</span>
+        <span><i class="kk" style="background:#4e9b00;"></i> Geração no desempenho atual</span>
+        <span><i class="kk" style="background:rgba(192,52,42,.35);"></i> O que fica pelo caminho</span>
+      </div>
+      <div class="grafico exemplo" id="grafico">
+        <p class="gr-exemplo-nota" id="grNota">Exemplo: 12 placas de 585 W em Belém, mais de 1 ano sem limpeza. Calcule a sua usina no topo da página.</p>
+        <div class="barras" id="barras" role="img" aria-label="Gráfico de barras, mês a mês, da geração esperada e da geração no desempenho atual"></div>
+        <div class="gr-tip" id="grTip"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ══ QUEM SOMOS ══ -->
+<div class="branco" id="quem-somos">
+  <div class="wrap">
+    <section aria-labelledby="t-quem">
+      <div class="sec-head">
+        <span class="eyebrow">Quem somos</span>
+        <h2 id="t-quem">Quem cuida da sua usina</h2>
+        <p class="lede">A Solar Green Suporte nasceu pra cuidar do sistema solar depois que a instalação termina. A gente não vende usina nova: entra quando a usina já existe, e o trabalho é garantir que ela continue gerando o que prometeu. Ficamos em Belém e atendemos o Norte do Pará.</p>
+      </div>
+      <noscript><figure class="registro-estatico"><img src="assets/fotos/01 - Equipe em visita tecnica.jpg" width="600" height="1067" alt="Registro de visita técnica da Solar Green" loading="lazy"></figure></noscript>
+      <div class="carrossel" id="carrossel">
+        <div class="car-trilho" id="carTrilho"></div>
+        <button class="car-nav car-prev" id="carPrev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="car-nav car-next" id="carNext" type="button" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="car-pontos" id="carPontos"></div>
+      <div class="resp">
+        <div class="r-rot">Responsável técnico</div>
+        <div class="r-nome">Felipe Eduardo Pamplona de Sousa Nascimento</div>
+        <div class="r-cargo">Engenheiro eletricista</div>
+      </div>
     </section>
   </div>
 </div>
@@ -437,9 +461,9 @@
       <div>
         <h3>Serviços</h3>
         <ul>
-          <li><a href="#servicos">Monitoramento</a></li>
-          <li><a href="#servicos">Limpeza e manutenção</a></li>
-          <li><a href="#servicos">Regularização</a></li>
+          <li><a href="monitoramento-energia-solar.html">Monitoramento</a></li>
+          <li><a href="manutencao-limpeza-energia-solar.html">Limpeza e manutenção</a></li>
+          <li><a href="fatura-equatorial-energia-solar.html">Regularização</a></li>
           <li><a href="#servicos">Expansão</a></li>
         </ul>
       </div>
@@ -461,7 +485,7 @@
 </div>
 
 <!-- ══ MODAL DO RESULTADO DA CALCULADORA ══ -->
-<div class="modal-resultado" id="modalResultado" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Resultado do cálculo">
+<div class="modal-resultado" id="modalResultado" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Contato sobre o resultado">
   <div class="mr-caixa">
     <button class="mr-fechar" id="mrFechar" type="button">Continuar no site</button>
 
@@ -476,11 +500,11 @@
         <div class="res-item"><div class="v" id="resPior">-</div><div class="l">pior mês</div></div>
       </div>
       <div class="res-cta mr-cta" id="resCta">
+        <button class="btn-form" id="ctaDuvidas" type="button">Quero conversar sobre meu resultado</button>
         <a class="btn-zap" id="ctaZap" href="https://wa.me/5591987598592" data-evento="whatsapp_resultado" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
-          Resolver a perda agora
+          Prefiro falar agora no WhatsApp
         </a>
-        <button class="btn-form" id="ctaDuvidas" type="button">Tirar dúvidas</button>
       </div>
       <p class="res-horario" id="resHorario"></p>
       <p class="res-fonte">Estimativa. Irradiação do Global Solar Atlas (Banco Mundial, Solargis), plano inclinado no ângulo ideal, com 20% de perdas normais do sistema. O número real depende de sombreamento, idade dos módulos e estado do inversor, medidos na vistoria.</p>
@@ -494,8 +518,8 @@
         <div class="campos">
           <div class="campo full"><label for="mNome">Nome</label><input type="text" id="mNome" autocomplete="name" required></div>
           <div class="campo full"><label for="mZap">WhatsApp</label><input type="tel" id="mZap" autocomplete="tel" inputmode="tel" required></div>
-          <div class="campo"><label for="mCidade">Cidade</label><input type="text" id="mCidade" autocomplete="address-level2"></div>
-          <div class="campo"><label for="mServico">O que você precisa</label>
+          <div class="campo" hidden><label for="mCidade">Cidade</label><input type="text" id="mCidade" autocomplete="address-level2"></div>
+          <div class="campo" hidden><label for="mServico">O que você precisa</label>
             <select id="mServico">
               <option>Limpeza e manutenção</option>
               <option>Monitoramento</option>

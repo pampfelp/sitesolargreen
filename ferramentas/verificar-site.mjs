@@ -15,7 +15,7 @@ const calc = await import(pathToFileURL(join(raiz, 'js/calculo.js')).href);
 const paginasServico = ['conta-alta-energia-solar.html', 'manutencao-limpeza-energia-solar.html',
   'monitoramento-energia-solar.html', 'fatura-equatorial-energia-solar.html',
   'goteira-telhado-energia-solar.html', 'diagnostico-rede-eletrica-consultoria.html'];
-const paginas = ['index.html', ...paginasServico, 'obrigado.html', 'privacidade.html', '404.html'];
+const paginas = ['index.html', 'reajuste.html', ...paginasServico, 'obrigado.html', 'privacidade.html', '404.html'];
 const html = Object.fromEntries(paginas.map(p => [p, ler(p)]));
 const idx = html['index.html'];
 
@@ -70,7 +70,11 @@ for (const p of paginas) {
     ok(existsSync(join(raiz, arquivo)), p + ': ' + u + ' existe');
   }
 }
-for (const m of idx.matchAll(/href="#([^"]+)"/g)) ok(new RegExp('id="' + m[1] + '"').test(idx), 'index: âncora #' + m[1]);
+for (const p of paginas) {
+  const ids = [...html[p].matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
+  ok(ids.length === new Set(ids).size, p + ': ids sem duplicatas');
+  for (const m of html[p].matchAll(/href="#([^"]+)"/g)) ok(ids.includes(m[1]), p + ': âncora #' + m[1]);
+}
 for (const m of ler('sitemap.xml').matchAll(/<loc>https:\/\/solargreensuporte\.com\.br\/([^<]*)<\/loc>/g)) {
   ok(existsSync(join(raiz, m[1] || 'index.html')), 'sitemap: ' + (m[1] || '/') + ' existe');
 }
